@@ -13,7 +13,7 @@ See: [Install Sitecore Command Line Interface](https://doc.sitecore.com/xp/en/de
 cd C:\projects\Find-overwritten-Sitecore-resource-items
 
 dotnet new tool-manifest
-dotnet nuget add source -n Sitecore https://sitecore.myget.org/F/sc-packages/api/v3/index.json\
+dotnet nuget add source -n Sitecore https://sitecore.myget.org/F/sc-packages/api/v3/index.json \
 #use the version you need or don't provide a version for the latest, note the 4.1.0 is old\
 dotnet tool install Sitecore.CLI --version 4.1.0
 
