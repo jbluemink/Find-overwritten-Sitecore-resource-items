@@ -15,9 +15,5 @@
     "removeOrphansForRoles": true,
     "continueOnItemFailure": false,
     "excludedFields": []
-  },
-  "settings": {
-    "telemetryEnabled": false,
-    "versionComparingEnabled": true
   }
 }

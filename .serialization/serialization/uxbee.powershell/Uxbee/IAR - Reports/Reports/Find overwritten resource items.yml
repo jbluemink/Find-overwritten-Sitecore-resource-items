@@ -2,7 +2,7 @@
 ID: "2564efc3-b5f7-427c-ae08-bc9a907cd125"
 Parent: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Reports/Find overwritten resource items"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Reports/Find overwritten resource items"
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
@@ -128,6 +128,7 @@ SharedFields:
         Title = "Overwritten resource item report"
         InfoTitle = "Item as resource"
         InfoDescription = "View if a resource file item is overwritten in sql database"
+        ViewName = "FindIAR"
     }
     
     $reportItems = @()
@@ -140,25 +141,3 @@ SharedFields:
      
     Close-Window
     
-Languages:
-- Language: en
-  Versions:
-  - Version: 1
-    Fields:
-    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
-      Hint: __Created
-      Value: 20220902T141538Z
-    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
-      Hint: __Created by
-      Value: |
-        sitecore\Admin
-    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
-      Hint: __Revision
-      Value: "6fa8010e-139d-4810-9c43-b7f8a1e27038"
-    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
-      Hint: __Updated by
-      Value: |
-        sitecore\Admin
-    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
-      Hint: __Updated
-      Value: 20230304T102733Z
