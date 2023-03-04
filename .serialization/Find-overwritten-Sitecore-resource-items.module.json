@@ -1,0 +1,15 @@
+﻿{
+  "namespace": "FindIAR",
+  "references": [],
+  "tags": [ "managed" ],
+  "items": {
+    "includes": [
+      {
+        "name": "uxbee.powershell",
+        "path": "/sitecore/system/Modules/PowerShell/Script Library/Uxbee",
+        "scope": "ItemAndDescendants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
+  }
+}

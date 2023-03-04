@@ -1,0 +1,164 @@
+﻿---
+ID: "2564efc3-b5f7-427c-ae08-bc9a907cd125"
+Parent: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Reports/Find overwritten resource items"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: businessv2/32x32/data_warning.png
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    $database = "master"
+    
+    function GetResourceFiles($databaseName) {
+        $datfilepaths = [ordered]@{}
+        $xmlfilepath = [Sitecore.Configuration.Factory]::GetConfigNode("databases/database[@id='" + $databaseName + "']/dataProviders/dataProvider/param/protobufItems/filePaths")
+        [int]$count = 2
+        foreach( $n in $xmlfilepath.ChildNodes)
+        {
+            $filepath = $n.InnerText.Replace('$(id)',$databaseName)
+            Write-Host "path in config $filepath"
+            $serverpath = [Sitecore.IO.FileUtil]::MapPath("~/$filepath")
+            Write-Host "ServerPath = $serverpath"
+            $query = "$($serverpath)/*.dat"
+            Get-ChildItem -Path $query | ForEach-Object {
+                $datfilepaths+=@{"$_" = "$_"}
+            }
+        }
+        return $datfilepaths
+    }
+    
+    $displayOptions = [ordered]@{
+        "Display only overwritten resource items" = 1
+        "All" = 2
+    }
+    
+    $settings = @{
+        Title = "Report Filter"
+        OkButtonName = "Proceed"
+        CancelButtonName = "Abort"
+        Description = "List all overwriten resource items"
+        Parameters = @(
+            @{
+                Name = "selectedPaths"
+                Title = "Path"
+                Options = GetResourceFiles($database)
+                Tooltip = "Pick the resource filed to check"
+                Editor = "checklist"
+                Validation = { $_.Value -ne $null }
+            },
+            @{
+                Name = "selectedAll"
+                Title = "Display all"
+                Value = 1
+                Options = $displayOptions
+                Tooltip = "Select All to get a report with all resource items with a overwritten column or show only the overwritten items for possible shorter report. "
+                Editor = "radio"
+            }
+        )
+        Icon = [regex]::Replace($PSScript.Appearance.Icon, "Office", "OfficeWhite", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        ShowHint = $true
+    }
+    $result = Read-Variable @settings
+    if($result -ne "ok") {
+        Exit
+    }
+    
+    function CheckPath($databaseName, $pathstring)
+    {
+        $reportItems = @()
+        $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
+        $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
+        $path = [Sitecore.MainUtil]::MapPath($pathstring)
+        $file = [System.IO.Path]::GetFileName($pathstring)
+        $paths = [System.Collections.Generic.List[String]]@($path)
+        $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
+        $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+        $database = [Sitecore.Configuration.Factory]::GetDatabase($databaseName)
+        $connectionString = [System.Configuration.ConfigurationManager]::ConnectionStrings[$databaseName]
+        $callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
+        $sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
+        $itemsRemoved = $false
+        Write-Host "Clear All SqlDataProvider Cache"
+        Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
+        Write-Host "Check if resource items are in sql database"
+        Write-Host "Using the files in $path for database $databaseName"
+        foreach($itemRecord in $itemDataSet.Definitions.Values)
+        {
+            $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
+            $itemDefinition = $sqlDataProvider.GetItemDefinition($id, $callContext)
+            $notOverwritten = $true
+            if($itemDefinition) {
+                $notOverwritten = $false
+            }
+            if($itemDefinition -OR ($selectedAll -eq 2))
+            {
+                $query = [string]::Join("", $databaseName, ": -ID  $id")
+                $item = Get-Item -Path $query
+                Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
+                $reportItem = [PSCustomObject]@{
+                    "Icon" = $item."__Icon"
+                    "Name"=$item.Name
+                    "Not Overwritten" = $notOverwritten
+                    "Path" = $item.ItemPath
+                    "Template" = $item.TemplateName
+                    "ID" = $itemRecord.ID
+                    "File" = $file
+                }
+                $reportItems += $reportItem
+            }
+        }
+        Write-Host "Checking items for directory $pathstring done"
+        return $reportItems
+    }
+    
+    
+    $reportProps = @{
+        Property = @(
+            "Icon",
+            "Name",
+            "Not Overwritten",
+            "Path",
+            "Template",
+            "ID",
+            "File"
+        )
+        Title = "Overwritten resource item report"
+        InfoTitle = "Item as resource"
+        InfoDescription = "View if a resource file item is overwritten in sql database"
+    }
+    
+    $reportItems = @()
+    foreach($val in $selectedPaths) {
+        $reportItems += CheckPath $database $val
+    }
+    
+    $reportItems | 
+            Show-ListView @reportProps
+     
+    Close-Window
+    
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20220902T141538Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "6fa8010e-139d-4810-9c43-b7f8a1e27038"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230304T102733Z
