@@ -1,13 +1,13 @@
 ﻿# Do not commit this file to source control or modify it. It is safe to delete; it will recreate itself.
 ---
 File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal.yml
-ID: "160b9bfe-3f7e-43a9-9601-4e846bcbf37a"
-Parent: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View.yml
+ID: "19ba188d-3362-4bd1-a828-00b89b81d0c0"
+Parent: "160b9bfe-3f7e-43a9-9601-4e846bcbf37a"
 Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal"
-Signature: kURWhO0RJwQ9DN1SNYCd2xXSc8k+onPZPVoEdbc/U4g=
-Modified: 638135234936170926
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View"
+Signature: vF7ZiHFG01pt0HuW2wJUzO8jXFCzEzOZXBogtuYQY8Y=
+Modified: 638135427203189326
 ---
 File: |
   C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee.yml
@@ -15,86 +15,95 @@ ID: "4fbf303a-5ef9-41a9-bb48-0db0946dc556"
 Parent: "a3572733-5062-43e9-a447-54698bc1c637"
 Template: "b6a55ac6-a602-4c09-ac3a-1d2938621d5b"
 Path: /sitecore/system/Modules/PowerShell/Script Library/Uxbee
-Signature: Vcxpc1HrXjZInCk4Y27JZaZdyYuoGKiPrxx8NmQNnXc=
-Modified: 638135234936125665
+Signature: GkYCCx1YgWK3x4EwQY1wQGVQUQ78w77ylvwD4Uaj78I=
+Modified: 638135427202667271
 ---
 File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View\Ribbon.yml
-ID: "805db038-4e12-435f-90fa-f3b6352b128d"
-Parent: "19ba188d-3362-4bd1-a828-00b89b81d0c0"
-Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View/Ribbon"
-Signature: 6d7PaxQEDt1wxNKVGrbnSQ7gk46GZNUcLu+gGB6uHcM=
-Modified: 638135234936300750
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View\Ribbon\PSObject.yml
-ID: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
-Parent: "805db038-4e12-435f-90fa-f3b6352b128d"
-Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View/Ribbon/PSObject"
-Signature: kGl6LYyxClRL1PrT1bSgl+bhK0Xeoz4dcX4ZKMz6qJo=
-Modified: 638135234936320133
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View\Ribbon\PSObject\Delete including childs.yml
-ID: "e5ad444f-7ada-44be-8fc6-8ff945d985ea"
-Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
-Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View/Ribbon/PSObject/Delete including childs"
-Signature: t8aoNBqiP4fquPWMJGe71ah4YJDgveJphMVkc/+cp3g=
-Modified: 638135234936340022
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View\Ribbon\PSObject\Delete.yml
-ID: "e7adbc1c-9a82-4945-a977-8c82374d98d0"
-Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
-Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View/Ribbon/PSObject/Delete"
-Signature: 2Ot0MTTx0CmkIg2PoRm+0UiPRewcPIUu32NaouPJcII=
-Modified: 638135234936329636
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports.yml
-ID: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
-Parent: "4fbf303a-5ef9-41a9-bb48-0db0946dc556"
-Template: "6d82fcd8-c379-443c-97a9-c6423c71e7d5"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports"
-Signature: 370Y3naNynaKa+UDOb5FTRvsNSP84sSZHYdS/4o6LLk=
-Modified: 638135234936160939
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Reports.yml
-ID: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
-Parent: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
-Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Reports"
-Signature: Q+A+lrG/RawMNpRWVADddw0jbp0Ecm/aLQPnRX0YJgY=
-Modified: 638135234936190906
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View\Ribbon\PSObject\Open.yml
-ID: "2e8ed902-6ef7-4cde-8646-aff85ac28615"
-Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
-Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View/Ribbon/PSObject/Open"
-Signature: qDN4+MfF/S6zDTQhZjJsIcnXzG2/CBsjSsiUhCHiBW4=
-Modified: 638135234936340022
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Internal\List View.yml
-ID: "19ba188d-3362-4bd1-a828-00b89b81d0c0"
-Parent: "160b9bfe-3f7e-43a9-9601-4e846bcbf37a"
-Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Internal/List View"
-Signature: 6d7PaxQEDt1wxNKVGrbnSQ7gk46GZNUcLu+gGB6uHcM=
-Modified: 638135234936216382
----
-File: |
-  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR- Reports\Reports\Find overwritten resource items.yml
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Reports\Find overwritten resource items.yml
 ID: "2564efc3-b5f7-427c-ae08-bc9a907cd125"
 Parent: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR- Reports/Reports/Find overwritten resource items"
-Signature: gr62hvGAD8G797CGyUGlBmhsEncggQuYN/XDakx/RGo=
-Modified: 638135234936279638
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Reports/Find overwritten resource items"
+Signature: QCOuQVIm73qIldHLoqGppKBzFDzG/IoUoYrV7/axQO8=
+Modified: 638135427203189326
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal.yml
+ID: "160b9bfe-3f7e-43a9-9601-4e846bcbf37a"
+Parent: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
+Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal"
+Signature: vF7ZiHFG01pt0HuW2wJUzO8jXFCzEzOZXBogtuYQY8Y=
+Modified: 638135427203178735
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon.yml
+ID: "805db038-4e12-435f-90fa-f3b6352b128d"
+Parent: "19ba188d-3362-4bd1-a828-00b89b81d0c0"
+Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon"
+Signature: vF7ZiHFG01pt0HuW2wJUzO8jXFCzEzOZXBogtuYQY8Y=
+Modified: 638135427203199538
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports.yml
+ID: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
+Parent: "4fbf303a-5ef9-41a9-bb48-0db0946dc556"
+Template: "6d82fcd8-c379-443c-97a9-c6423c71e7d5"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports"
+Signature: lDeKP4igocHvf3bFV92wO5+Z6T/2dhzjNZ3+V6a6cCk=
+Modified: 638135427203168590
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon\PSObject.yml
+ID: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Parent: "805db038-4e12-435f-90fa-f3b6352b128d"
+Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject"
+Signature: PdCbk9rQ+Eh56dQ1w2QtIu1z+PUXip1KOwmakPbHKE0=
+Modified: 638135427203199538
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Reports.yml
+ID: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
+Parent: "8f363c1d-a26f-446b-aedb-eb75a7d11bd7"
+Template: "ab154d3d-1126-4ab4-ac21-8b86e6bd70ea"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Reports"
+Signature: vF7ZiHFG01pt0HuW2wJUzO8jXFCzEzOZXBogtuYQY8Y=
+Modified: 638135427203178735
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon\PSObject\Refresh.yml
+ID: "a481b4a8-e099-465b-b72b-d382c502ccd2"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Refresh"
+Signature: pl71pgcOUXSjEaL03XonZZ80N2IsGLfqTdGTSg0+ll0=
+Modified: 638142314893593137
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon\PSObject\Open.yml
+ID: "2e8ed902-6ef7-4cde-8646-aff85ac28615"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Open"
+Signature: rCsO1L/fNdxiCrEzXthO7GKF8h8lI7FN4mhMQv6bOzQ=
+Modified: 638142314893583200
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon\PSObject\Delete including childs.yml
+ID: "e5ad444f-7ada-44be-8fc6-8ff945d985ea"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Delete including childs"
+Signature: RzSO1YhuFg0HDPPsrLZp4sv9/RVeCCayoIp1LTJ4skk=
+Modified: 638142314893553111
+---
+File: |
+  C:\projects\Find-overwritten-Sitecore-resource-items\.serialization\serialization\uxbee.powershell\Uxbee\IAR - Reports\Internal\List View\Ribbon\PSObject\SQL Delete.yml
+ID: "e7adbc1c-9a82-4945-a977-8c82374d98d0"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/SQL Delete"
+Signature: OZmnkhZL9v1Zcccj0y+DrU7ZqMDw2glwmmGDUCbwB0s=
+Modified: 638142314893603148

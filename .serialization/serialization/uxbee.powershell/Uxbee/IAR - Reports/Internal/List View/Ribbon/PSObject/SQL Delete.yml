@@ -24,32 +24,45 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    $confirm = Show-Confirm -Title "Do you want to delete by directy calling the sql dataprovider, and not updating index and sending event?"
+    if ($confirm -eq "yes") {
     foreach($reportrow in $selectedData) {
-     Show-Alert -Title $item
-    	#restore IAR item, and don't touching children.
-    	$item = Get-Item -Path "master:" -ID $reportrow.ID
-    	$database = $item.Database
-    	$databaseName = $database.Name
-    	$connectionString = [System.Configuration.ConfigurationManager]::ConnectionStrings[$database.Name]
-    	$sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
-    	$callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
-    	$sqlDataProvider.DeleteItem($item.InnerData.Definition, $callContext)
+        	#restore IAR item, and don't touching children.
+        	$item = Get-Item -Path "master:" -ID $reportrow.ID
+        	$database = $item.Database
+        	$databaseName = $database.Name
+        	$connectionString = [System.Configuration.ConfigurationManager]::ConnectionStrings[$database.Name]
+        	$sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
+        	$callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
+        	$sqlDataProvider.DeleteItem($item.InnerData.Definition, $callContext)
+        }
+        #flush all cache
+        Get-Cache | % { $_.Clear() }
     }
-    #flush all cache
-    Get-Cache | % { $_.Clear() }
+    
 Languages:
-- Language: da
+- Language: en
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: ** Say Hello **
+    Value: SQL Delete
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20190718T201931Z
+      Value: 20230312T144944Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "bfdbeee4-3538-450d-a65d-275d00be3b89"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230312T152725Z
