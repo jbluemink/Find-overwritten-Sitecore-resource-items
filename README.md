@@ -1,10 +1,15 @@
 # Find-overwritten-Sitecore-resource-items
 a Sitecore PowerShell Report for Sitecore IAR items, Items as Resources.
 
+# For Sitecore 10.2, Sitecore 10.3+ and XM Cloud
+
 IAR Sitecore items can be overwritten by a sql database item, With the Sitecore PowerShell report you can easy find the item and delete/restore the item as resource.
 
 See blog [Items as resources by Sitecore part 2: reports](https://uxbee.nl/actueel/items-as-resources-by-sitecore-part-2)
 
+
+## Download and Install the tool, Powershell Report
+copy (items.master.iaroverwrittenreport.dat)  to \sitecore modules\items\master of your Sitecore CM instance.
 
 ## Install Sitecore Command Line Interface
 See: [Install Sitecore Command Line Interface](https://doc.sitecore.com/xp/en/developers/103/developer-tools/install-sitecore-command-line-interface.html)
@@ -27,5 +32,8 @@ dotnet sitecore ser push
 #pull sitecore item to files\
 dotnet sitecore ser pull
 
+
+## Genarate iar .dat file
+dotnet sitecore itemres create -o iaroverwrittenreport
 
 
