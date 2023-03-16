@@ -6,7 +6,7 @@ IAR Sitecore items can be overwritten by a sql database item, With the Sitecore 
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/find-overwritten-sitecore-resource-items.png)
 
-See blog [Iitems as resources by sitecore part 3](https://uxbee.nl/actueel/items-as-resources-by-sitecore-part-3)
+See blog [Items as resources by sitecore part 3](https://uxbee.nl/actueel/items-as-resources-by-sitecore-part-3)
 See blog [Items as resources by Sitecore part 2: reports](https://uxbee.nl/actueel/items-as-resources-by-sitecore-part-2)
 Based on the first version of this tool. See [gist](https://gist.github.com/jbluemink/ac0851a20a3e94a25a6d998dcd25f466)
 
