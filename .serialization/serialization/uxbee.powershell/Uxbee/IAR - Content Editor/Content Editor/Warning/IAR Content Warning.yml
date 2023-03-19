@@ -1,0 +1,89 @@
+﻿---
+ID: "4c004ee3-6f0c-42a3-9989-e76cb4edcfb7"
+Parent: "0709258d-77b3-43af-854e-b3173f64f15f"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Content Editor/Content Editor/Warning/IAR Content Warning"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: people/32x32/teacher.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{4A8B93D7-077E-4027-A4AF-E329BCC5EA4C}">
+        <conditions>
+          <condition
+            id="{4888ABBB-F17D-4485-B14B-842413F88732}"
+            uid="B9FDF540E0434EBD9E19387C416FC7C9" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    $sitecoreversion = [Sitecore.Configuration.About]::Version
+    
+    if ($sitecoreversion.StartsWith('10.1'))
+    {
+     #Sorry this is only for Sitecore 10.2+ and XMCloud
+     exit
+    }
+    
+    $icon = $PSScript.Appearance.Icon
+    $iconUrl = [Sitecore.Resources.Images]::GetThemedImageSource($icon)
+    $title = "Item as resource"
+    $text = "<img src='$($iconUrl)' />This item is an item as resources"
+    
+    $item = Get-Item -Path .
+    $aItemLocation = $item.Database.DataManager.DataSource.GetItemLocations($item.ID)
+    
+    $isResource = [Sitecore.Data.DataProviders.ItemLocations.AggregatedItemLocationsExtensions]::IsResource($aItemLocation)
+    $isOverridden = [Sitecore.Data.DataProviders.ItemLocations.AggregatedItemLocationsExtensions]::IsOverridden($aItemLocation)
+    
+    if ( $isOverridden ) 
+    {
+     $text = "<img src='$($iconUrl)' />This item is an Overridden item as resources"
+    }
+    
+    if ($isResource) {
+     $warning = $pipelineArgs.Add()
+     $warning.Title = $title
+     $warning.Text = $text
+    }
+- ID: "f62c67b4-28b6-4a6f-91cb-db78cf054f4e"
+  Hint: EnableRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{BF7C86E8-9F4F-4F01-93B3-AB3F227C8B5F}">
+        <conditions>
+          <condition
+            id="{4888ABBB-F17D-4485-B14B-842413F88732}"
+            uid="6289B986E06E4137991AABF77F119A97" />
+        </conditions>
+      </rule>
+    </ruleset>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190614T030850Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "61cc5e0f-07a6-4729-b071-1a16fb0c85fb"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230319T124937Z
