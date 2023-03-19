@@ -16,6 +16,9 @@ Based on the first version of this tool. See [gist](https://gist.github.com/jblu
 ## IAR Content Editor Warning for Sitecore 10.2+ or XM Cloud.
 See blog :
 
+![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
+
+
 ## Download and Install the tool, Powershell Report
 For just installing and use the tool the easy way is:
 copy items.master.iaroverwrittenreport.dat  to \sitecore modules\items\master of your Sitecore CM instance.
