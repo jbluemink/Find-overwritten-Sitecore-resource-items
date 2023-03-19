@@ -14,7 +14,7 @@ See blog [Items as resources by Sitecore part 2: reports](https://uxbee.nl/actue
 Based on the first version of this tool. See [gist](https://gist.github.com/jbluemink/ac0851a20a3e94a25a6d998dcd25f466)
 
 ## IAR Content Editor Warning for Sitecore 10.2+ or XM Cloud.
-See blog :
+See blog : [Item as resources PowerShell Content Editor Warning](https://www.stockpick.nl/sitecore/item-as-resources-powershell-warning/)
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
 
