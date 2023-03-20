@@ -86,29 +86,29 @@ SharedFields:
         Write-Host "Check if resource items are in sql database"
         Write-Host "Using the files in $path for database $databaseName"
         foreach($itemRecord in $itemDataSet.Definitions.Values)
-        {
-            $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
-            $itemDefinition = $sqlDataProvider.GetItemDefinition($id, $callContext)
-            $notOverwritten = $true
-            if($itemDefinition) {
-                $notOverwritten = $false
-            }
-            if($itemDefinition -OR ($selectedAll -eq 2))
             {
-                $query = [string]::Join("", $databaseName, ": -ID  $id")
-                $item = Get-Item -Path $query
-                Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
-                $reportItem = [PSCustomObject]@{
-                    "Icon" = $item."__Icon"
-                    "Name"=$item.Name
-                    "Not Overwritten" = $notOverwritten
-                    "Path" = $item.ItemPath
-                    "Template" = $item.TemplateName
-                    "ID" = $itemRecord.ID
-                    "File" = $file
+                $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
+                $itemDefinition = $sqlDataProvider.GetItemDefinition($id, $callContext)
+                $notOverwritten = $true
+                if($itemDefinition) {
+                    $notOverwritten = $false
                 }
-                $reportItems += $reportItem
-            }
+                if($itemDefinition -OR ($selectedAll -eq 2))
+                {
+                    $query = [string]::Join("", $databaseName, ": -ID  $id")
+                    $item = Get-Item -Path $query
+                    Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
+                    $reportItem = [PSCustomObject]@{
+                        "Icon" = $item."__Icon"
+                        "Name"=$item.Name
+                        "Not Overwritten" = $notOverwritten
+                        "Path" = $item.ItemPath
+                        "Template" = $item.TemplateName
+                        "ID" = $itemRecord.ID
+                        "File" = $file
+                    }
+                    $reportItems += $reportItem
+                }
         }
         Write-Host "Checking items for directory $pathstring done"
         return $reportItems
@@ -141,3 +141,33 @@ SharedFields:
      
     Close-Window
     
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: 
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230320T073814Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\Admin
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "19ac69cc-7be5-458e-aef7-2d120cd13bda"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230320T075050Z
