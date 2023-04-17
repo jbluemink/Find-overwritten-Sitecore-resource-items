@@ -25,9 +25,9 @@ SharedFields:
   Value: |
     $sitecoreversion = [Sitecore.Configuration.About]::Version
     
-    if ($sitecoreversion.StartsWith('10.1'))
+    If ($sitecoreversion.StartsWith('10.1') -or $sitecoreversion.StartsWith('10.2'))
     {
-     #Sorry this is only for Sitecore 10.2+ and XMCloud
+     #Sorry this is only for Sitecore 10.3+ and XMCloud
      exit
     }
     
@@ -79,11 +79,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "61cc5e0f-07a6-4729-b071-1a16fb0c85fb"
+      Value: "cba4f459-7eba-4e79-b2a6-6d4604a06f49"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230319T124937Z
+      Value: 20230417T100453Z

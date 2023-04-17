@@ -4,10 +4,11 @@
     "./.serialization/*.module.json"
   ],
   "plugins": [
-    "Sitecore.DevEx.Extensibility.Serialization@4.1.0",
-    "Sitecore.DevEx.Extensibility.Publishing@4.1.0",
-    "Sitecore.DevEx.Extensibility.Indexing@4.1.0",
-    "Sitecore.DevEx.Extensibility.ResourcePackage@4.1.0"
+    "Sitecore.DevEx.Extensibility.Database@5.1.25",
+    "Sitecore.DevEx.Extensibility.Serialization@5.1.25",
+    "Sitecore.DevEx.Extensibility.Publishing@5.1.25",
+    "Sitecore.DevEx.Extensibility.Indexing@5.1.25",
+    "Sitecore.DevEx.Extensibility.ResourcePackage@5.1.25"
   ],
   "serialization": {
     "defaultMaxRelativeItemPathLength": 100,
@@ -15,5 +16,9 @@
     "removeOrphansForRoles": true,
     "continueOnItemFailure": false,
     "excludedFields": []
+  },
+  "settings": {
+    "telemetryEnabled": false,
+    "versionComparingEnabled": true
   }
 }

@@ -13,7 +13,7 @@ See blog [Items as resources by sitecore part 3](https://uxbee.nl/actueel/items-
 See blog [Items as resources by Sitecore part 2: reports](https://uxbee.nl/actueel/items-as-resources-by-sitecore-part-2)
 Based on the first version of this tool. See [gist](https://gist.github.com/jbluemink/ac0851a20a3e94a25a6d998dcd25f466)
 
-## IAR Content Editor Warning for Sitecore 10.2+ or XM Cloud.
+## IAR Content Editor Warning for Sitecore 10.3+ or XM Cloud.
 See blog : [Item as resources PowerShell Content Editor Warning](https://www.stockpick.nl/sitecore/item-as-resources-powershell-warning/)
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
@@ -32,8 +32,7 @@ cd C:\projects\Find-overwritten-Sitecore-resource-items
 
 dotnet new tool-manifest
 dotnet nuget add source -n Sitecore https://sitecore.myget.org/F/sc-packages/api/v3/index.json \
-#use the version you need or don't provide a version for the latest, note the 4.1.0 is a bit old\
-dotnet tool install Sitecore.CLI --version 4.1.0
+dotnet tool install Sitecore.CLI --version 5.1.25
 
 #dotnet sitecore init
 
