@@ -1,0 +1,236 @@
+﻿---
+ID: "9bb8f07d-452d-46a3-9979-fa03da65078a"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Compair"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/32x32/documents_gear.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{8E5F1CD2-6BFF-49D7-B2A3-8AE8AA108048}">
+        <conditions>
+          <condition
+            id="{1B499603-87C9-4440-969F-D9568CE1E926}"
+            uid="112CB455EFD84FDAB73A319CB8F54EB5"
+            ValidViewName="FindIAR" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function GetLanguageFieldValue($LanguageDataItem, $fieldguid, $version, $lan)
+    {
+        if ($LanguageDataItem -eq $null)
+        {
+            return $null
+        }
+    
+        $lanvalue = $null
+        $LanguageDataItem.TryGetValue($lan, [ref]$lanvalue)
+        if ($lanvalue -eq $null) {
+            Write-Host "language $lan not found"
+            return $null
+        }
+        
+        $vervalue = $null
+        $lanvalue.TryGetValue($version, [ref]$vervalue)
+        if ($vervalue -eq $null) {
+            Write-Host "version $version $lan not found"
+            return $null
+        }
+        
+        $fieldvalue = $null
+        $vervalue.TryGetValue($fieldguid, [ref]$fieldvalue)
+        if ($fieldvalue -eq $null) {
+            Write-Host "field $fieldguid not found for version $version $lan"
+            return $null
+        }
+        return $true
+    }
+    
+    function GetFieldMessage($item, $type, $fieldguid, $iarvalue, $dbvalue)
+    {
+          $fielditem = Get-Item -Path $item.Database.Name -ID $fieldguid
+          $result = "$type $fieldguid $($fielditem.Name)`n"
+          $result += "IAR=$($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))`n"
+          $result +="DB =$($dbvalue.substring(0, [System.Math]::Min(500, $dbvalue.Length)))`n`n"
+          Write-Host $result
+          return $result
+    }
+    
+    function CheckItemPath($databaseName, $pathstring, $item)
+    {
+        if ($item -eq $null)
+        {
+             Write-Host "Error item.ID is null"
+            exit
+        }
+        if ($item.ID -eq $null)
+        {
+             Write-Host "Error /  issue item.ID is null"
+            exit
+        }
+        Write-Host "Compair item: $($item.FullPath)"
+        $result = "Compair IAR item with DB variant: $($item.FullPath)`n`n"
+        $reportItems = @()
+        $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
+        $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
+        $path = [Sitecore.MainUtil]::MapPath($pathstring)
+        $file = [System.IO.Path]::GetFileName($pathstring)
+        $paths = [System.Collections.Generic.List[String]]@($path)
+        $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
+        $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+        #$database = [Sitecore.Configuration.Factory]::GetDatabase($databaseName)
+        #$connectionString = [System.Configuration.ConfigurationManager]::ConnectionStrings[$databaseName]
+        #$callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
+        #$sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
+        #$itemsRemoved = $false
+        Write-Host "Clear All SqlDataProvider Cache"
+        Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
+        Write-Host "Using the files in $path for database $databaseName"
+        
+        Write-Host "SharedData = $($itemDataSet.SharedData) tryget $($item.ID)"
+        $itemFieldsIAR = $itemDataSet.SharedData.TryGetValue($item.ID.ToGuid())
+        
+        if ($itemFieldsIAR -ne $null)
+        {
+            Write-Host "Item found in IAR"
+            foreach($fieldIAR in $itemFieldsIAR.GetEnumerator())
+            {
+                if ($fieldIAR.Value.ToString() -ne $item[$fieldIAR.Key])
+                {
+                  $result += GetFieldMessage $item "Shared Field" $fieldIAR.Key $fieldIAR.Value.ToString() $item[$fieldIAR.Key]
+                }
+                if ($item[$fieldIAR.Key].Shared -eq $false) {
+                    $result += "WARNING IAR Shared Field $fieldIAR.Key is not shared in the Database `n"
+                }
+            }
+        }
+        
+        #check if DB contains new standardFields
+        foreach($field in $item.Fields)
+        {
+          if ($field.Shared -and ($field.Value -ne "")) {
+              #check if DB contains new standardFields
+              if ($itemFieldsIAR -eq $null) 
+              {
+                  Write-Host "zero sharedvalues found in IAR, new sharedfield with value $field in DB"
+                  $result += GetFieldMessage $item "Shared Field not available in IAR (null or standard value)" $field.ID "" $item[$field.ID]
+              }
+              elseif ($itemFieldsIAR.ContainsKey($field.ID.ToGuid()) -eq $false)
+              {
+                   Write-Host "new sharedfield with value $field"
+                   $result += GetFieldMessage $item "Shared Field not available in IAR (null or standard value)" $field.ID "" $item[$field.ID]
+              }
+          }
+        }
+            
+        $itemFieldsIARVersion = $itemDataSet.LanguageData.TryGetValue($item.ID.ToGuid())
+        if ($itemFieldsIARVersion -ne $null)
+        {
+            Write-Host "Item found in IAR versioned fields"
+            foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
+            {
+                Write-Host "taal - $($languageIAR.Key) `n"
+                $lang = $languageIAR.Key
+                $VersionData = $languageIAR.Value
+                foreach($versionIAR in $VersionData.GetEnumerator())
+                {
+                  #version 0 is unversioned, else versioned
+                  Write-Host "version is $($versionIAR.Key)"
+                  if ($versionIAR.Key -eq 0) {
+                      $lanitem = Get-Item -Path $item.Database.Name -ID $item.ID.Guid -Language $lang
+                  } else 
+                  {
+                     $lanitem = Get-Item -Path $item.Database.Name -ID $item.ID.Guid -Language $lang -Version $versionIAR.Key
+                  }
+                  $fieldData = $versionIAR.Value
+                  if ($lanitem -eq $null)
+                  {
+                      $result += "Version $($versionIAR.Key) $lang item version not found in Database `n"
+                  } else 
+                  {
+                      foreach($fieldvalueIAR in $fieldData.GetEnumerator())
+                      {
+                          Write-Host "field id is $($fieldvalueIAR.Key)  value=$($fieldvalueIAR.Value)"
+                          if ($fieldvalueIAR.Value.ToString() -ne $lanitem[$fieldvalueIAR.Key])
+                          {
+                            Write-Host "ongelijk"
+                            $result += GetFieldMessage $item "Version $($versionIAR.Key) $lang Field" $fieldvalueIAR.Key $fieldvalueIAR.Value.ToString() $lanitem[$fieldvalueIAR.Key]
+                          }
+                      }
+                  }
+                }
+            }
+        }
+    
+        $itemversions = $item.Versions.GetVersions($true)
+    
+        foreach($itemversion in $itemversions)
+        {
+            Write-Host "itemversion = $itemversion -- $($item.ID) $($itemversion.Language) $($itemversion.Version)"
+            #get overwrite database item
+            $itemv = Get-Item -Path "master:" -ID $item.ID -Language $itemversion.Language -Version $itemversion.Version -ErrorAction SilentlyContinue
+            foreach($field in $itemv.Fields)
+            {
+                 if ($field.Value -ne "") 
+                 {
+                     if ($field.Unversioned)
+                     {
+                        #check if DB contains new unversionsed fields, this can multiple the same, no deduplication for now, todo
+                        if (GetLanguageFieldValue $itemFieldsIARVersion $field.ID.Guid 0 $itemversion.Language -eq $false) 
+                        {
+                            $result += GetFieldMessage $item "Unversioned Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
+                        }
+                     } else
+                     {
+                        # versioned field
+                        if (GetLanguageFieldValue $itemFieldsIARVersion $field.ID.ToString() $itemversion.Version.Number $itemversion.Language -eq $false) 
+                        {
+                            $result += GetFieldMessage $item "Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
+                        }
+                     }
+                 }
+            }
+        }
+        
+        Write-Host "Checking items for directory $pathstring done, $($result.Length)"
+        if ($result.Length -eq 86) {
+            $result += "No changes found.?"
+        }
+        return $result
+    }
+    
+    foreach($reportrow in $selectedData) {
+       	$item = Get-Item -Path "master:" -ID $reportrow.ID
+       	$changelog = CheckItemPath "master" $reportrow.file $item
+       	Show-Alert $changelog
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230304T141734Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "0416bde7-c6b1-4bce-be1f-1d01d51d8245"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230505T190556Z

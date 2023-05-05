@@ -105,7 +105,7 @@ SharedFields:
                         "Path" = $item.ItemPath
                         "Template" = $item.TemplateName
                         "ID" = $itemRecord.ID
-                        "File" = $file
+                        "File" = $pathstring
                     }
                     $reportItems += $reportItem
                 }
@@ -163,11 +163,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "19ac69cc-7be5-458e-aef7-2d120cd13bda"
+      Value: "54f5b794-f42a-46b7-93d7-0df3d8ccd761"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230320T075050Z
+      Value: 20230505T190439Z
