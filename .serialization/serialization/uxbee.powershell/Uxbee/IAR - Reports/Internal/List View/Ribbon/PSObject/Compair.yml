@@ -24,10 +24,13 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    
+    
     function GetLanguageFieldValue($LanguageDataItem, $fieldguid, $version, $lan)
     {
         if ($LanguageDataItem -eq $null)
         {
+            Write-Host "no LanguageData in IAR"
             return $null
         }
     
@@ -56,10 +59,10 @@ SharedFields:
     
     function GetFieldMessage($item, $type, $fieldguid, $iarvalue, $dbvalue)
     {
-          $fielditem = Get-Item -Path $item.Database.Name -ID $fieldguid
-          $result = "$type $fieldguid $($fielditem.Name)`n"
-          $result += "IAR=$($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))`n"
-          $result +="DB =$($dbvalue.substring(0, [System.Math]::Min(500, $dbvalue.Length)))`n`n"
+          $fielditem = Get-Item -Path "$($item.Database.Name):" -ID $fieldguid
+          $result = "<b>$type $fieldguid $($fielditem.Name)</b>`n"
+          $result += "IAR=<span style='background-color:powderblue;'>$($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))</span>`n"
+          $result +="DB =<span style='background-color:powderblue;'>$($dbvalue.substring(0, [System.Math]::Min(500, $dbvalue.Length)))</span>`n`n"
           Write-Host $result
           return $result
     }
@@ -77,7 +80,7 @@ SharedFields:
             exit
         }
         Write-Host "Compair item: $($item.FullPath)"
-        $result = "Compair IAR item with DB variant: $($item.FullPath)`n`n"
+        $result = "<b style='font-size:18px;'>Compair IAR item with DB variant:</b> $($item.FullPath)`n`n"
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
         $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
@@ -86,11 +89,7 @@ SharedFields:
         $paths = [System.Collections.Generic.List[String]]@($path)
         $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
         $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
-        #$database = [Sitecore.Configuration.Factory]::GetDatabase($databaseName)
-        #$connectionString = [System.Configuration.ConfigurationManager]::ConnectionStrings[$databaseName]
-        #$callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
-        #$sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
-        #$itemsRemoved = $false
+    
         Write-Host "Clear All SqlDataProvider Cache"
         Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
         Write-Host "Using the files in $path for database $databaseName"
@@ -145,10 +144,10 @@ SharedFields:
                   #version 0 is unversioned, else versioned
                   Write-Host "version is $($versionIAR.Key)"
                   if ($versionIAR.Key -eq 0) {
-                      $lanitem = Get-Item -Path $item.Database.Name -ID $item.ID.Guid -Language $lang
+                      $lanitem = Get-Item -Path "$($item.Database.Name):" -ID $item.ID.Guid -Language $lang
                   } else 
                   {
-                     $lanitem = Get-Item -Path $item.Database.Name -ID $item.ID.Guid -Language $lang -Version $versionIAR.Key
+                     $lanitem = Get-Item -Path "$($item.Database.Name):" -ID $item.ID.Guid -Language $lang -Version $versionIAR.Key
                   }
                   $fieldData = $versionIAR.Value
                   if ($lanitem -eq $null)
@@ -174,7 +173,7 @@ SharedFields:
     
         foreach($itemversion in $itemversions)
         {
-            Write-Host "itemversion = $itemversion -- $($item.ID) $($itemversion.Language) $($itemversion.Version)"
+            Write-Host "itemversion =  $($item.ID) $($itemversion.Language) $($itemversion.Version)"
             #get overwrite database item
             $itemv = Get-Item -Path "master:" -ID $item.ID -Language $itemversion.Language -Version $itemversion.Version -ErrorAction SilentlyContinue
             foreach($field in $itemv.Fields)
@@ -184,14 +183,14 @@ SharedFields:
                      if ($field.Unversioned)
                      {
                         #check if DB contains new unversionsed fields, this can multiple the same, no deduplication for now, todo
-                        if (GetLanguageFieldValue $itemFieldsIARVersion $field.ID.Guid 0 $itemversion.Language -eq $false) 
+                        if ((GetLanguageFieldValue $itemFieldsIARVersion $field.ID.Guid 0 $itemversion.Language) -eq $false) 
                         {
                             $result += GetFieldMessage $item "Unversioned Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
                      } else
                      {
                         # versioned field
-                        if (GetLanguageFieldValue $itemFieldsIARVersion $field.ID.ToString() $itemversion.Version.Number $itemversion.Language -eq $false) 
+                        if ((GetLanguageFieldValue $itemFieldsIARVersion $field.ID.ToString() $itemversion.Version.Number $itemversion.Language) -eq $false) 
                         {
                             $result += GetFieldMessage $item "Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
@@ -226,11 +225,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "0416bde7-c6b1-4bce-be1f-1d01d51d8245"
+      Value: "5433b165-eba6-4f94-92fa-4bbb040c5034"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230505T190556Z
+      Value: 20230508T203304Z
