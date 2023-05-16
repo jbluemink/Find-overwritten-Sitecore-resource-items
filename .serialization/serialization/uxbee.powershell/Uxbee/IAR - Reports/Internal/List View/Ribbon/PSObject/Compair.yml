@@ -25,34 +25,33 @@ SharedFields:
   Hint: Script
   Value: |
     
-    
     function GetLanguageFieldValue($LanguageDataItem, $fieldguid, $version, $lan)
     {
         if ($LanguageDataItem -eq $null)
         {
             Write-Host "no LanguageData in IAR"
-            return $null
+            return $false
         }
     
         $lanvalue = $null
         $LanguageDataItem.TryGetValue($lan, [ref]$lanvalue)
         if ($lanvalue -eq $null) {
-            Write-Host "language $lan not found"
-            return $null
+            Write-Host "language $lan not found in IAR"
+            return $false
         }
         
         $vervalue = $null
         $lanvalue.TryGetValue($version, [ref]$vervalue)
         if ($vervalue -eq $null) {
-            Write-Host "version $version $lan not found"
-            return $null
+            Write-Host "version $version $lan not found in IAR"
+            return $false
         }
         
         $fieldvalue = $null
         $vervalue.TryGetValue($fieldguid, [ref]$fieldvalue)
         if ($fieldvalue -eq $null) {
-            Write-Host "field $fieldguid not found for version $version $lan"
-            return $null
+            Write-Host "field $fieldguid not found for version $version $lan in IAR"
+            return $false
         }
         return $true
     }
@@ -60,9 +59,18 @@ SharedFields:
     function GetFieldMessage($item, $type, $fieldguid, $iarvalue, $dbvalue)
     {
           $fielditem = Get-Item -Path "$($item.Database.Name):" -ID $fieldguid
-          $result = "<b>$type $fieldguid $($fielditem.Name)</b>`n"
-          $result += "IAR=<span style='background-color:powderblue;'>$($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))</span>`n"
-          $result +="DB =<span style='background-color:powderblue;'>$($dbvalue.substring(0, [System.Math]::Min(500, $dbvalue.Length)))</span>`n`n"
+          $result = "$type $fieldguid <b>$($fielditem.Name)</b>`n"
+          $result += "IAR<div style='background-color:Yellow;'>"
+          $result += [System.Net.WebUtility]::HtmlEncode($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))
+          if ($iarvalue.Length -gt 500) {
+           $result += "... <b>length=$($iarvalue.Length) characters</b>"
+          }
+          $result +="</div>DB<div style='background-color:Yellow;'>"
+          $result += [System.Net.WebUtility]::HtmlEncode($dbvalue.substring(0, [System.Math]::Min(500, $dbvalue.Length)))
+          if ($dbvalue.Length -gt 500) {
+                 $result += "... <b>length=$($dbvalue.Length) characters</b>"
+          }
+          $result +="</div>`n"
           Write-Host $result
           return $result
     }
@@ -136,7 +144,7 @@ SharedFields:
             Write-Host "Item found in IAR versioned fields"
             foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
             {
-                Write-Host "taal - $($languageIAR.Key) `n"
+                Write-Host "Language - $($languageIAR.Key) `n"
                 $lang = $languageIAR.Key
                 $VersionData = $languageIAR.Value
                 foreach($versionIAR in $VersionData.GetEnumerator())
@@ -152,7 +160,7 @@ SharedFields:
                   $fieldData = $versionIAR.Value
                   if ($lanitem -eq $null)
                   {
-                      $result += "Version $($versionIAR.Key) $lang item version not found in Database `n"
+                      $result += "Version <b>$($versionIAR.Key) $lang</b> item version not found in Database `n`n"
                   } else 
                   {
                       foreach($fieldvalueIAR in $fieldData.GetEnumerator())
@@ -160,8 +168,8 @@ SharedFields:
                           Write-Host "field id is $($fieldvalueIAR.Key)  value=$($fieldvalueIAR.Value)"
                           if ($fieldvalueIAR.Value.ToString() -ne $lanitem[$fieldvalueIAR.Key])
                           {
-                            Write-Host "ongelijk"
-                            $result += GetFieldMessage $item "Version $($versionIAR.Key) $lang Field" $fieldvalueIAR.Key $fieldvalueIAR.Value.ToString() $lanitem[$fieldvalueIAR.Key]
+                            Write-Host "not equal"
+                            $result += GetFieldMessage $item "Version <b>$($versionIAR.Key) $lang</b> Field" $fieldvalueIAR.Key $fieldvalueIAR.Value.ToString() $lanitem[$fieldvalueIAR.Key]
                           }
                       }
                   }
@@ -225,11 +233,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "5433b165-eba6-4f94-92fa-4bbb040c5034"
+      Value: "636daa73-a214-498c-a06c-28b3f2145890"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230508T203304Z
+      Value: 20230516T204200Z
