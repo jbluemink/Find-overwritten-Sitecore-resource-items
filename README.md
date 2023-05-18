@@ -23,6 +23,9 @@ See blog : [Item as resources PowerShell Content Editor Warning](https://www.sto
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
 
+# TODO
+- Add support for core database
+- Add suppoprt for language .dat files.
 
 ## Download and Install the tool, Powershell Report
 For just installing and use the tool the easy way is:
