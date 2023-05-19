@@ -33,26 +33,26 @@ SharedFields:
         }
     
         $lanvalue = $null
-        $LanguageDataItem.TryGetValue($lan, [ref]$lanvalue)
+        $tmp = $LanguageDataItem.TryGetValue($lan, [ref]$lanvalue)
         if ($lanvalue -eq $null) {
             Write-Host "language $lan not found in IAR, perhaps the language data is stored in a separate file"
             return "language $lan not found in IAR, perhaps the language data is stored in a separate file"
         }
         
         $vervalue = $null
-        $lanvalue.TryGetValue($version, [ref]$vervalue)
+        $tmp = $lanvalue.TryGetValue($version, [ref]$vervalue)
         if ($vervalue -eq $null) {
             Write-Host "version $version $lan not found in IAR"
-            return $false
+            return "0"
         }
         
         $fieldvalue = $null
-        $vervalue.TryGetValue($fieldguid, [ref]$fieldvalue)
+        $tmp = $vervalue.TryGetValue($fieldguid, [ref]$fieldvalue)
         if ($fieldvalue -eq $null) {
             Write-Host "field $fieldguid not found for version $version $lan in IAR"
-            return $false
+            return "0"
         }
-        return $true
+        return "1"
     }
     
     function GetFieldMessage($item, $type, $fieldguid, $iarvalue, $dbvalue)
@@ -168,7 +168,12 @@ SharedFields:
                           if ($fieldvalueIAR.Value.ToString() -ne $lanitem[$fieldvalueIAR.Key])
                           {
                             Write-Host "not equal"
-                            $result += GetFieldMessage $item "Version <b>$($versionIAR.Key) $lang</b> Field" $fieldvalueIAR.Key $fieldvalueIAR.Value.ToString() $lanitem[$fieldvalueIAR.Key]
+                            $Fieldinfo = "Field"
+                            if ($versionIAR.Key -eq 0) 
+                            {
+                            	$Fieldinfo = "unversioned Field"
+                            }
+                            $result += GetFieldMessage $item "Version <b>$($versionIAR.Key) $lang</b> $Fieldinfo" $fieldvalueIAR.Key $fieldvalueIAR.Value.ToString() $lanitem[$fieldvalueIAR.Key]
                           }
                       }
                   }
@@ -191,11 +196,11 @@ SharedFields:
                      {
                         #check if DB contains new unversionsed fields, this can multiple the same, no deduplication for now, todo
                         $isFieldinIAR = GetLanguageFieldValue $itemFieldsIARVersion $field.ID.Guid 0 $itemversion.Language
-                        if ($isFieldinIAR -eq $false) 
+                        if ($isFieldinIAR -eq "0") 
                         {
                             $result += GetFieldMessage $item "Unversioned Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
-                        ElseIf ($isFieldinIAR -ne $true) 
+                        ElseIf ($isFieldinIAR -ne "1") 
     		    {
     		        $result += GetFieldMessage $item "Unversioned Field not available in IAR ($isFieldinIAR) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
@@ -203,11 +208,11 @@ SharedFields:
                      {
                         # versioned field
                         $isVerFieldinIAR = GetLanguageFieldValue $itemFieldsIARVersion $field.ID.ToString() $itemversion.Version.Number $itemversion.Language
-                        if ($isVerFieldinIAR -eq $false) 
+                        if ($isVerFieldinIAR -eq "0") 
                         {
                             $result += GetFieldMessage $item "Field not available in IAR (null or standard value) Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
-                        ElseIf ($isVerFieldinIAR -ne $true) 
+                        ElseIf ($isVerFieldinIAR -ne "1") 
     		    {
     		    	$result += GetFieldMessage $item "Field not available in IAR ($isVerFieldinIAR)  Version $($itemversion.Version.Number) $($itemversion.Language) Field" $field.ID "" $itemv[$field.ID]
                         }
@@ -242,11 +247,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a206bf5a-eec4-4ebb-be83-ed595df08226"
+      Value: "814eea81-0c27-412c-a419-ab9d5aaff549"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230518T124956Z
+      Value: 20230519T153517Z
