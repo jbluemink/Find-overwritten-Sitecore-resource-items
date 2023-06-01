@@ -1,0 +1,58 @@
+﻿---
+ID: "45e0406c-f8ea-40fb-9024-3f7d1d8a9f0f"
+Parent: "4cf384c3-5c0c-4c8a-abfb-4fa0ca2556ec"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Core/Functions/IAR-FindResourceFile"
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function -Name IAR-GetResourceFiles
+    function IAR-FindResourceFile($item) {
+      $files = IAR-GetResourceFiles $item.Database.Name
+    
+     $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
+     $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
+     $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
+      foreach( $n in $files.GetEnumerator())
+      {  
+       $file = $n.Value
+       Write-Host "check $file for  IAR"
+        $path = [Sitecore.MainUtil]::MapPath($file)
+        $paths = [System.Collections.Generic.List[String]]@($path)
+       
+        $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+        $itemFieldsIAR = $itemDataSet.SharedData.TryGetValue($item.ID.ToGuid())
+        if ($itemFieldsIAR -ne $null)
+        {
+            return $file
+        }
+       }
+    return ""
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230601T115754Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\Admin
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "e204b200-3140-4386-9964-55bfdb7322ae"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\Admin
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230601T140655Z

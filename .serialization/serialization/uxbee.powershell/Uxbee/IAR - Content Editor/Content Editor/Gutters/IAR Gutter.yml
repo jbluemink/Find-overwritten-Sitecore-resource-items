@@ -29,11 +29,18 @@ SharedFields:
     $gutter = New-Object Sitecore.Shell.Applications.ContentEditor.Gutters.GutterIconDescriptor
     $gutter.Icon = "business/32x32/data_certificate.png"
     $gutter.Tooltip = "Item is stored in resource file"
+    $scriptId = "{5375B256-5A8E-44DD-9C99-717B90773912}"
     
     if ($isOverridden) {
      $gutter.Icon = "business/32x32/data_copy.png"
      $gutter.Tooltip = "Item is an Overridden resource file item."
+    
+    $scriptId = "{80333C30-F2A9-4B17-B53C-B0C8F4EB0C70}"
     }
+    
+    $script = Get-Item -Path "master:" -ID $scriptId
+    $command = "item:executescript(id=$($item.ID),db=$($item.Database.Name),script=$($script.ID),scriptDb=$($script.Database.Name))"
+    $gutter.Click = $command
     
     $gutter
     
@@ -55,11 +62,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "5b9824fd-5b61-4bae-b71a-a68d025b7195"
+      Value: "1909ff68-70ef-4e89-8578-89def0e937dc"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230531T140018Z
+      Value: 20230601T143418Z
