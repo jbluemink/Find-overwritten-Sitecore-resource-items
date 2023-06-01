@@ -35,6 +35,8 @@ SharedFields:
     $iconUrl = [Sitecore.Resources.Images]::GetThemedImageSource($icon)
     $title = "Item as resource"
     $text = "<img src='$($iconUrl)' />This item is an item as resources"
+    $scriptId = "{5375B256-5A8E-44DD-9C99-717B90773912}"
+    $scriptText = "Get resource filename"
     
     $item = Get-Item -Path .
     $aItemLocation = $item.Database.DataManager.DataSource.GetItemLocations($item.ID)
@@ -45,6 +47,8 @@ SharedFields:
     if ( $isOverridden ) 
     {
      $text = "<img src='$($iconUrl)' />This item is an Overridden item as resources"
+     $scriptId = "{80333C30-F2A9-4B17-B53C-B0C8F4EB0C70}"
+     $scriptText = "Compare"
     }
     
     if ($isResource) {
@@ -52,6 +56,11 @@ SharedFields:
      $warning.Title = $title
      $warning.Text = $text
     }
+    
+    $script = Get-Item -Path "master:" -ID $scriptId
+    $command = "item:executescript(id=$($item.ID),db=$($item.Database.Name),script=$($script.ID),scriptDb=$($script.Database.Name))"
+    $warning.AddOption("$scriptText ", $command)
+    $warning.HideFields = $false
 - ID: "f62c67b4-28b6-4a6f-91cb-db78cf054f4e"
   Hint: EnableRule
   Value: |
@@ -79,11 +88,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "cba4f459-7eba-4e79-b2a6-6d4604a06f49"
+      Value: "92e60b71-6e43-4638-8f9c-d084f8ac4754"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230417T100453Z
+      Value: 20230601T204726Z

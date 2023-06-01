@@ -70,7 +70,7 @@ SharedFields:
             exit
         }
         Write-Host "Compare item: $($item.FullPath)"
-        $result = "<b style='font-size:18px;'>Compare IAR item with DB variant:</b> $($item.FullPath)`n`n"
+        $result = "<b style='font-size:18px;'>Compare IAR item with DB variant:</b> $($item.FullPath)`n`n$pathstring`n`n"
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
         $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
@@ -205,9 +205,6 @@ SharedFields:
         }
         
         Write-Host "Checking items for directory $pathstring done, $($result.Length)"
-        if ($result.Length -eq 86) {
-            $result += "No changes found.?"
-        }
         return $result
     }
     
@@ -229,11 +226,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "5e37809e-e0bc-41c6-ad4e-15de3158b902"
+      Value: "9070e8b7-a6ca-4109-b7bc-2a9961e96f40"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T094229Z
+      Value: 20230601T203644Z

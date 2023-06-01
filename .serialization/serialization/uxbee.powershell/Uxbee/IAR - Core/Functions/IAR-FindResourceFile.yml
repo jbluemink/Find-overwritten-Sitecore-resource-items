@@ -14,20 +14,22 @@ SharedFields:
      $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
      $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
      $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
-      foreach( $n in $files.GetEnumerator())
+     foreach( $n in $files.GetEnumerator())
       {  
        $file = $n.Value
-       Write-Host "check $file for  IAR"
-        $path = [Sitecore.MainUtil]::MapPath($file)
-        $paths = [System.Collections.Generic.List[String]]@($path)
+       Write-Host "check $file for  IAR  looking for $($item.ID)"
+       $path = [Sitecore.MainUtil]::MapPath($file)
+       $paths = [System.Collections.Generic.List[String]]@($path)
        
-        $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
-        $itemFieldsIAR = $itemDataSet.SharedData.TryGetValue($item.ID.ToGuid())
-        if ($itemFieldsIAR -ne $null)
-        {
-            return $file
-        }
+       $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+       foreach($itemRecord in $itemDataSet.Definitions.Values)
+       {
+           $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
+           if ($id -eq $item.ID) {
+             return $file
+           } 
        }
+      }
     return ""
     }
 Languages:
@@ -48,11 +50,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e204b200-3140-4386-9964-55bfdb7322ae"
+      Value: "aae637fe-b726-4f05-9793-7d82e4860b8a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T140655Z
+      Value: 20230601T202718Z

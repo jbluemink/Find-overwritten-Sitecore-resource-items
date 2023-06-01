@@ -17,7 +17,7 @@ SharedFields:
         Show-Alert "Resource file not found for item: $($item.Name)"
     } else 
     {
-         Show-Alert "Resource file for item: $($item.Name) is $file"
+         Show-Alert "Resource file for item: $($item.Name) is in file $file"
     }
     
     Close-Window
@@ -39,11 +39,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8eae3515-6883-48fd-ae75-582f9e5a7ed8"
+      Value: "50ca847c-39e2-4813-b214-4c9bff00badb"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T143314Z
+      Value: 20230601T203823Z
