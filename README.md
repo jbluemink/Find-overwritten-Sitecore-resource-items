@@ -3,6 +3,7 @@
 - A Content Editor warning for IAR items and IAR overridden, overwritten items in Sitecore PowerShell
 - A overwritten resource item compare in the Report
 - A overwritten resource item restore/delete in the Report
+- A Items as Resources, IAR Gutter with compare / resource file lookup.
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
@@ -26,6 +27,10 @@ See the Compare in action
 See blog : [Item as resources PowerShell Content Editor Warning](https://www.stockpick.nl/sitecore/item-as-resources-powershell-warning/)
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
+
+## IAR Gutter
+To enable, in Sitecore Shell, bottom left corner start button, click, PowerShell Toolbox, Rebuild script intergration points.
+Enable IAR Gutter in Sitecore content editor, right mouse click in the left from the Tree, enable IAR Gutter
 
 # TODO
 - Add support for core database
