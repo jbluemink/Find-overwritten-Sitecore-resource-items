@@ -32,6 +32,8 @@ See blog : [Item as resources PowerShell Content Editor Warning](https://www.sto
 To enable, in Sitecore Shell, bottom left corner start button, click, PowerShell Toolbox, Rebuild script intergration points.
 Enable IAR Gutter in Sitecore content editor, right mouse click in the left from the Tree, enable IAR Gutter
 
+![IAR-Gutter](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/sitecore-iar-gutter-with-resource-file-lookup-compare.png)
+
 # TODO
 - Add support for core database
 - Add suppoprt for language .dat files.
