@@ -23,12 +23,12 @@ Based on the first version of this tool. See [gist](https://gist.github.com/jblu
 See the Compare in action
 - [YouTube Tools for working with Sitecore Items as Resources - Compare Items](https://www.youtube.com/watch?v=8AHDOQr2zsA)
 
-## IAR Content Editor Warning for Sitecore 10.3+ or XM Cloud.
+## IAR Content Editor Warning for Sitecore 10.3+ and XM Cloud.
 See blog : [Item as resources PowerShell Content Editor Warning](https://www.stockpick.nl/sitecore/item-as-resources-powershell-warning/)
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/Overridden-item-as-resource-content-editor-warning.png)
 
-## IAR Gutter
+## IAR Gutter for Sitecore 10.3+ and XM Cloud.
 To enable, in Sitecore Shell, bottom left corner start button, click, PowerShell Toolbox, Rebuild script intergration points.
 Enable IAR Gutter in Sitecore content editor, right mouse click in the left from the Tree, enable IAR Gutter
 
