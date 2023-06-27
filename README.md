@@ -23,6 +23,7 @@ Based on the first version of this tool. See [gist](https://gist.github.com/jblu
 
 See the Compare in action
 - [YouTube Tools for working with Sitecore Items as Resources - Compare Items](https://www.youtube.com/watch?v=8AHDOQr2zsA)
+
 See the gutter in action
 - [YouTube Sitecore Items as Resources - IAR gutter](https://youtu.be/yAUxVGcWlp0)
 
