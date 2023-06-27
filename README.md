@@ -15,6 +15,7 @@ IAR Sitecore items can be overwritten by a sql database item, With the Sitecore 
 
 ![compare-Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/iar-compare-report.png)
 See blog 
+- [Items as resources by Sitecore part 5: gutter](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-5)
 - [Items as resources by Sitecore part 4: compare](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-4)
 - [Items as resources by sitecore part 3: restoring](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-3)
 - [Items as resources by Sitecore part 2: reports](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-2)
@@ -22,6 +23,8 @@ Based on the first version of this tool. See [gist](https://gist.github.com/jblu
 
 See the Compare in action
 - [YouTube Tools for working with Sitecore Items as Resources - Compare Items](https://www.youtube.com/watch?v=8AHDOQr2zsA)
+See the gutter in action
+- [YouTube Sitecore Items as Resources - IAR gutter](https://youtu.be/yAUxVGcWlp0)
 
 ## IAR Content Editor Warning for Sitecore 10.3+ and XM Cloud.
 See blog : [Item as resources PowerShell Content Editor Warning](https://www.stockpick.nl/sitecore/item-as-resources-powershell-warning/)
