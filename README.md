@@ -49,6 +49,7 @@ copy items.master.iaroverwrittenreport.dat  to \sitecore modules\items\master of
 ## For using the Sitecore CLI and optional using Visual Studio to edit the module.json
 ### Install Sitecore Command Line Interface
 See: [Install Sitecore Command Line Interface](https://doc.sitecore.com/xp/en/developers/103/developer-tools/install-sitecore-command-line-interface.html)
+Note: You must have .NET 6 installed on your workstation before installing the Sitecore CLI.
 
 #cd {project folder}\
 cd C:\projects\Find-overwritten-Sitecore-resource-items
