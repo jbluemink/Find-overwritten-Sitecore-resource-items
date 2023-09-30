@@ -3,6 +3,7 @@
 - A Content Editor warning for IAR items and IAR overridden, overwritten items in Sitecore PowerShell
 - A overwritten resource item compare in the Report
 - A overwritten resource item restore/delete in the Report
+- A package resource item in the Report
 - A Items as Resources, IAR Gutter with compare / resource file lookup.
 
 ## PowerShell only
@@ -42,11 +43,14 @@ Enable IAR Gutter in Sitecore content editor, right mouse click in the left from
 - Add support for core database
 - Add suppoprt for language .dat files.
 
-## Download and Install the tool, Powershell Report
+# Installing
+3 options for installing this tool, choose the option you like 
+
+## option 1) Download and Install the tool, Powershell Report
 For just installing and use the tool the easy way is:
 copy items.master.iaroverwrittenreport.dat  to \sitecore modules\items\master of your Sitecore CM instance.
 
-## For using the Sitecore CLI and optional using Visual Studio to edit the module.json
+## option 2) For using the Sitecore CLI and optional using Visual Studio to edit the module.json
 ### Install Sitecore Command Line Interface
 See: [Install Sitecore Command Line Interface](https://doc.sitecore.com/xp/en/developers/103/developer-tools/install-sitecore-command-line-interface.html) \
 Note: You must have .NET 6 installed on your workstation before installing the Sitecore CLI.
@@ -70,6 +74,10 @@ dotnet sitecore ser pull
 
 
 ### Generate IAR .dat file
+For developers if you made changes and want to update the .dat file
 dotnet sitecore itemres create -o iaroverwrittenreport
 
-
+## option 3) Install the package zip
+first option too much hassle, hey this is even easier with an old fashioned sitecore zip package
+Download Find-overwritten-Sitecore-resource-items.zip  and use the sitecore package installer.
+In desktop, Development Tools, Installation Wizard
