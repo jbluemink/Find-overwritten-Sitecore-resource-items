@@ -6,6 +6,10 @@
 - A package resource item in the Report
 - A Items as Resources, IAR Gutter with compare / resource file lookup.
 
+### Recent Updates:
+- 2 jan 2024 Add support for core database and web for non XM Cloud
+- 30 sep 2023 Add package option in report.
+
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
 
@@ -41,7 +45,6 @@ Enable IAR Gutter in Sitecore content editor, right mouse click in the left from
 ![IAR-Gutter](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/sitecore-iar-gutter-with-resource-file-lookup-compare.png)
 
 # TODO
-- Add support for core database
 - Add suppoprt for language .dat files.
 
 # Installing
@@ -80,5 +83,5 @@ dotnet sitecore itemres create -o iaroverwrittenreport
 
 ## option 3) Install the package zip
 first option too much hassle, hey this is even easier with an old fashioned sitecore zip package
-Download Find-overwritten-Sitecore-resource-items.zip  and use the sitecore package installer.
+Download Find-overwritten-Sitecore-resource-items-{DATE}.zip  and use the sitecore package installer.
 In desktop, Development Tools, Installation Wizard

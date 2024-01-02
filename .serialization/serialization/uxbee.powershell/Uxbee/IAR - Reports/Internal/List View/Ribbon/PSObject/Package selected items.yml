@@ -24,12 +24,13 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    $database = $actionData
     if ( !$selectedData)
     {
      Show-Alert -Title "no item(s) selected"
     exit
     }
-    $package = New-Package "IAR-selected-items"
+    $package = New-Package "IAR-selected-items-$database"
     
     # Set package metadata
     $package.Sources.Clear()
@@ -40,7 +41,7 @@ SharedFields:
     
     # Add itemsto the package
     foreach($reportrow in $selectedData) {
-    	$item = Get-Item -Path "master:" -ID $reportrow.ID
+    	$item = Get-Item -Path "$($database):" -ID $reportrow.ID
     	$Source = $item  | New-ExplicitItemSource -Name "selected items"
     	$Package.Sources.Add($Source)
     }
@@ -65,11 +66,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "757fd5d5-441f-489f-8fa6-502dd1685328"
+      Value: "47884224-9693-43ad-8668-ce701947e420"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\jbluemink
+        sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230929T160504Z
+      Value: 20240102T141108Z

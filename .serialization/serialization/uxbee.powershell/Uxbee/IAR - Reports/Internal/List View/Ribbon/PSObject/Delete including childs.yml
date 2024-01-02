@@ -26,7 +26,7 @@ SharedFields:
   Value: |
     foreach($reportrow in $selectedData) {
     	#restore IAR item, including children.
-    	$item = Get-Item -Path "master:" -ID $reportrow.ID |
+    	$item = Get-Item -Path "$($reportrow.Database):" -ID $reportrow.ID |
      Remove-Item
     }
 Languages:
@@ -43,11 +43,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "13cda556-623b-431b-99b2-c35dd58f210e"
+      Value: "5f9600a4-52e2-4d22-ab52-9982bc6da63d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230312T150721Z
+      Value: 20240102T135820Z

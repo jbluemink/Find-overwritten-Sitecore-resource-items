@@ -24,13 +24,16 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    if ($actionData -ne "master") {
+     Show-Alert -Title "Note this item is in the $actionData Database so the context of the new Content Editor is  also $actionData "
+    }
     foreach($item in $selectedData){
     # Run Sheer application on Desktop
     Show-Application `
         -Application "Content Editor" `
         -Parameter @{id ="$($item.ID)"; fo="$($item.ID)"; 
                      la="$($item.Language.Name)"; vs="$($item.Version.Number)";
-                     sc_content="$($item.Database.Name)"}
+                     sc_content="$($item.Database)"}
     }
 Languages:
 - Language: en
@@ -50,11 +53,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e4eeb8a5-ecd5-4332-bb27-74a495c56756"
+      Value: "880903c4-8960-4824-ae1e-fe76e59efcaf"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230312T152800Z
+      Value: 20240102T133951Z

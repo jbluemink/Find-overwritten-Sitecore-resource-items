@@ -10,8 +10,6 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
-    $database = "master"
-    
     function GetResourceFiles($databaseName) {
         $datfilepaths = [ordered]@{}
         $xmlfilepath = [Sitecore.Configuration.Factory]::GetConfigNode("databases/database[@id='" + $databaseName + "']/dataProviders/dataProvider/param/protobufItems/filePaths")
@@ -35,11 +33,48 @@ SharedFields:
         "All" = 2
     }
     
+    function GetDatabases() {
+     $databases = [ordered]@{
+    	"core" = "core"
+    	"master" = "master"
+     }
+     $sitecoreversioninfo = [Sitecore.Configuration.About]::VersionInformation()
+     if ($sitecoreversioninfo.Contains("XMCloud") -eq $false)
+     {
+        $databases.Add("web", "web")
+     }
+    
+     return $databases
+    }
+    
+    $dbsettings = @{
+        Title = "Report Filter database"
+        OkButtonName = "Next"
+        CancelButtonName = "Abort"
+        Description = "List all databases"
+        Parameters = @(
+            @{
+                Name = "database"
+                Title = "Database"
+                Value = "master"
+                Options = GetDatabases
+                Tooltip = "Pick first the database "
+                Editor = "radio"
+            }
+        )
+        Icon = [regex]::Replace($PSScript.Appearance.Icon, "Office", "OfficeWhite", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        ShowHint = $true
+    }
+    $resultdb = Read-Variable @dbsettings
+    if($resultdb -ne "ok") {
+        Exit
+    }
+    
     $settings = @{
         Title = "Report Filter"
         OkButtonName = "Proceed"
         CancelButtonName = "Abort"
-        Description = "List all overwriten resource items"
+        Description = "List all overwritten resource items"
         Parameters = @(
             @{
                 Name = "selectedPaths"
@@ -100,12 +135,13 @@ SharedFields:
                     Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
                     $reportItem = [PSCustomObject]@{
                         "Icon" = $item."__Icon"
-                        "Name"=$item.Name
+                        "Name"= $item.Name
                         "Not Overwritten" = $notOverwritten
                         "Path" = $item.ItemPath
                         "Template" = $item.TemplateName
                         "ID" = $itemRecord.ID
                         "File" = $pathstring
+                        "Database" = $database
                     }
                     $reportItems += $reportItem
                 }
@@ -123,7 +159,8 @@ SharedFields:
             "Path",
             "Template",
             "ID",
-            "File"
+            "File",
+            "Database"
         )
         Title = "Overwritten resource item report"
         InfoTitle = "Item as resource"
@@ -137,7 +174,7 @@ SharedFields:
     }
     
     $reportItems | 
-            Show-ListView @reportProps
+            Show-ListView @reportProps -ActionData "$database"
      
     Close-Window
     
@@ -163,11 +200,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "29adf4b1-4c8d-431a-9e0b-04fcae45f522"
+      Value: "9e2ce31a-76bc-4eb4-9d6e-6828f9c50704"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230517T132356Z
+      Value: 20240102T153924Z

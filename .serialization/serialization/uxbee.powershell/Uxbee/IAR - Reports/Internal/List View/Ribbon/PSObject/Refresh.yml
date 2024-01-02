@@ -24,6 +24,7 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    $database = $actionData
     $sitecoreversion = [Sitecore.Configuration.About]::Version
     If ($sitecoreversion.StartsWith('10.1') -or $sitecoreversion.StartsWith('10.2'))
     {
@@ -32,7 +33,7 @@ SharedFields:
     }
     
     foreach($datarecord in $allData ){
-     $item = Get-Item -Path "master:" -ID $datarecord.ID
+     $item = Get-Item -Path "$($database):" -ID $datarecord.ID
      $aItemLocation = $item.Database.DataManager.DataSource.GetItemLocations($item.ID)
      $isOverridden = [Sitecore.Data.DataProviders.ItemLocations.AggregatedItemLocationsExtensions]::IsOverridden($aItemLocation)
     If ($isOverridden) {
@@ -61,11 +62,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "d07b3a40-802b-4e20-8ed7-e0b8915be176"
+      Value: "209b8763-cca3-465b-99be-c37f0132af6a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230417T100311Z
+      Value: 20240102T140436Z

@@ -24,6 +24,8 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
+    $database = $actionData
+    
     function GetLanguageFieldValue($LanguageDataItem, $fieldguid, $version, $lan)
     {
         if ($LanguageDataItem -eq $null)
@@ -187,7 +189,7 @@ SharedFields:
         {
             Write-Host "itemversion =  $($item.ID) $($itemversion.Language) $($itemversion.Version)"
             #get overwrite database item
-            $itemv = Get-Item -Path "master:" -ID $item.ID -Language $itemversion.Language -Version $itemversion.Version -ErrorAction SilentlyContinue
+            $itemv = Get-Item -Path "$($database):" -ID $item.ID -Language $itemversion.Language -Version $itemversion.Version -ErrorAction SilentlyContinue
             foreach($field in $itemv.Fields)
             {
                  if ($field.Value -ne "" -And $field.Shared -eq $false -And $field.ContainsStandardValue -eq $false) 
@@ -229,8 +231,8 @@ SharedFields:
     }
     
     foreach($reportrow in $selectedData) {
-       	$item = Get-Item -Path "master:" -ID $reportrow.ID
-       	$changelog = CheckItemPath "master" $reportrow.file $item
+       	$item = Get-Item -Path "$($database):" -ID $reportrow.ID
+       	$changelog = CheckItemPath "$database" $reportrow.file $item
        	Show-Alert $changelog
     }
 Languages:
@@ -247,11 +249,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "814eea81-0c27-412c-a419-ab9d5aaff549"
+      Value: "9aaa8a74-2297-497e-9371-219b40a5cae6"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\Admin
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230519T153517Z
+      Value: 20240102T135722Z
