@@ -47,6 +47,24 @@ SharedFields:
      return $databases
     }
     
+    function GetLanguages($itemDataSet, $itemkey) {
+        $languages = @()
+        $itemFieldsIARVersion = $itemDataSet.LanguageData.TryGetValue($itemkey)
+        if ($itemFieldsIARVersion -ne $null)
+        {
+            Write-Host "Item found in IAR versioned fields"
+            foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
+            {
+                Write-Host "Language - $($languageIAR.Key) `n"
+                if ($languages -notcontains $languageIAR.Key) {
+                    $languages +=$languageIAR.Key
+                }
+            }
+        }
+        return $languages
+    }
+      
+    
     $dbsettings = @{
         Title = "Report Filter database"
         OkButtonName = "Next"
@@ -133,6 +151,7 @@ SharedFields:
                     $query = [string]::Join("", $databaseName, ": -ID  $id")
                     $item = Get-Item -Path $query
                     Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
+                    $languages = GetLanguages $itemDataSet $itemRecord.ID
                     $reportItem = [PSCustomObject]@{
                         "Icon" = $item."__Icon"
                         "Name"= $item.Name
@@ -140,6 +159,7 @@ SharedFields:
                         "Path" = $item.ItemPath
                         "Template" = $item.TemplateName
                         "ID" = $itemRecord.ID
+                        "Language" = $languages 
                         "File" = $pathstring
                         "Database" = $database
                     }
@@ -159,6 +179,7 @@ SharedFields:
             "Path",
             "Template",
             "ID",
+             "Language" ,
             "File",
             "Database"
         )
@@ -200,11 +221,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9e2ce31a-76bc-4eb4-9d6e-6828f9c50704"
+      Value: "622e2ec8-5814-4bd4-847d-73a1160e93e0"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240102T153924Z
+      Value: 20240309T095005Z
