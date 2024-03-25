@@ -123,6 +123,48 @@ SharedFields:
         Exit
     }
     
+    function GetLanguageReportItems($itemDataSet, $itemkey) {
+     $reportItems = @()
+     $itemsfound= @()
+     foreach($itemRecord in $itemDataSet.LanguageData.Keys)
+     {
+       foreach($itemrecord in $itemDataSet.LanguageData.GetEnumerator())
+       {
+         if ($itemsfound -notcontains $itemrecord.Key) {
+           $itemsfound += $itemrecord.Key
+           $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemrecord.Key)
+           $itemDefinition = $sqlDataProvider.GetItemDefinition($id, $callContext)
+           $notOverwritten = $true
+           if($itemDefinition) {
+             $notOverwritten = $false
+           }
+           if($itemDefinition -OR ($selectedAll -eq 2))
+           {
+             $query = [string]::Join("", $databaseName, ": -ID  $id")
+             $item = Get-Item -Path $query
+             Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
+             $languages = GetLanguages $itemDataSet $itemRecord.Key
+             $reportItem = [PSCustomObject]@{
+    	    "Icon" = $item."__Icon"
+    	    "Name"= $item.Name
+    	    "Not Overwritten" = $notOverwritten
+    	    "Path" = $item.ItemPath
+    	    "Template" = $item.TemplateName
+    	    "ID" = $itemRecord.Key
+    	    "Language" = $languages 
+                "Note" =  "Only language data" 
+    	    "File" = $pathstring
+    	    "Database" = $database
+              }
+              $reportItems += $reportItem
+            }
+          }
+        }
+      }
+      return $reportItems 
+    }
+    
+    
     function CheckPath($databaseName, $pathstring)
     {
         $reportItems = @()
@@ -164,12 +206,18 @@ SharedFields:
                         "Template" = $item.TemplateName
                         "ID" = $itemRecord.ID
                         "Language" = $languages 
+                        "Note" =  "" 
                         "File" = $pathstring
                         "Database" = $database
                     }
                     $reportItems += $reportItem
                 }
         }
+       if ($itemDataSet.Definitions.Values.Count -eq 0)
+       {
+            Write-Host "Checking items as language file"
+            $reportItems += GetLanguageReportItems $itemDataSet 
+       }
         Write-Host "Checking items for directory $pathstring done"
         return $reportItems
     }
@@ -183,7 +231,8 @@ SharedFields:
             "Path",
             "Template",
             "ID",
-             "Language" ,
+            "Language" ,
+            "Note",
             "File",
             "Database"
         )
@@ -225,11 +274,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "622e2ec8-5814-4bd4-847d-73a1160e93e0"
+      Value: "a1170003-6f40-4a84-9a2d-b6f58927c25c"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\jbluemink
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240309T095005Z
+      Value: 20240325T213359Z

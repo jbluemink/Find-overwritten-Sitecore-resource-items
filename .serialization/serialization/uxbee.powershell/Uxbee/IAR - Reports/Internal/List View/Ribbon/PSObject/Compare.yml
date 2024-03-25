@@ -90,6 +90,7 @@ SharedFields:
         }
         Write-Host "Compare item: $($item.FullPath)"
         $result = "<b style='font-size:18px;'>Compare IAR item with DB variant:</b> $($item.FullPath)`n`n"
+        $result += "note: The IAR language data item can be stored in multiple files the compare use 1 file  $pathstring`n`n"
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
         $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
@@ -249,11 +250,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9aaa8a74-2297-497e-9371-219b40a5cae6"
+      Value: "39cd80b1-2887-4d75-bb03-bae45be21748"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240102T135722Z
+      Value: 20240325T214548Z
