@@ -1,0 +1,64 @@
+﻿---
+ID: "330b5faf-aec0-4f21-9b64-75a8388442fc"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Compare item"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/32x32/documents_gear.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{8E5F1CD2-6BFF-49D7-B2A3-8AE8AA108048}">
+        <conditions>
+          <condition
+            id="{1B499603-87C9-4440-969F-D9568CE1E926}"
+            uid="112CB455EFD84FDAB73A319CB8F54EB5"
+            ValidViewName="FindIAR" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    Import-Function -Name IAR-FindResourceFile
+    Import-Function -Name IAR-Compare
+    
+    $database = $actionData
+    
+    foreach($reportrow in $selectedData) {
+      $item = Get-Item -Path "$($database):" -ID $reportrow.ID
+      $files = IAR-FindResourceFile $item
+      if ($files -eq "") {
+        Show-Alert "Resource file not found for item: $($item.Name)"
+      } else 
+      {
+        $result = IAR-Compare $item.Database.Name $files $item
+        Show-Alert $result
+      }
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230304T141734Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7f7d87c4-8f07-4d3c-809a-3a2e47018e47"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jbluemink@uxbee.nl
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20240329T143723Z

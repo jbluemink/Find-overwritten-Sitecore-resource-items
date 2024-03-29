@@ -12,12 +12,12 @@ SharedFields:
     
     $item = Get-Item -Path .
     
-    $file = IAR-FindResourceFile $item
-    if ($file -eq "") {
+    $files = IAR-FindResourceFile $item
+    if ($files -eq "") {
         Show-Alert "Resource file not found for item: $($item.Name)"
     } else 
     {
-        $result = IAR-Compare $item.Database.Name $file $item
+        $result = IAR-Compare $item.Database.Name $files $item
         Show-Alert $result
     }
     
@@ -37,11 +37,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "cc75306b-9a7f-4c62-b344-22623a6bd2cc"
+      Value: "1ed377fa-2d3a-42a0-8e26-f70e139f364b"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T143126Z
+      Value: 20240329T120135Z

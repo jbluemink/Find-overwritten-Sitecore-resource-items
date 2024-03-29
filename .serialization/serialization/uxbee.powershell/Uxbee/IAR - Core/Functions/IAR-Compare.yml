@@ -74,12 +74,13 @@ SharedFields:
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
         $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
-        $path = [Sitecore.MainUtil]::MapPath($pathstring)
-        $file = [System.IO.Path]::GetFileName($pathstring)
-        $paths = [System.Collections.Generic.List[String]]@($path)
+       $paths = [System.Collections.Generic.List[String]]@()
+       foreach($iarPath in $pathstring)
+       {
+        $paths.Add( [Sitecore.MainUtil]::MapPath($iarPath));
+       }
         $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
         $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
-    
         Write-Host "Clear All SqlDataProvider Cache"
         Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
         Write-Host "Using the files in $path for database $databaseName"
@@ -226,11 +227,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9070e8b7-a6ca-4109-b7bc-2a9961e96f40"
+      Value: "8707c162-7df9-43b4-9305-69fc7079044d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T203644Z
+      Value: 20240329T141445Z

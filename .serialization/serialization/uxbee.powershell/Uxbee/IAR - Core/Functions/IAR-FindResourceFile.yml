@@ -8,30 +8,40 @@ SharedFields:
   Hint: Script
   Value: |
     Import-Function -Name IAR-GetResourceFiles
-    function IAR-FindResourceFile($item) {
-      $files = IAR-GetResourceFiles $item.Database.Name
-    
+    function IAR-FindResourceFile($item)
+    {
+     $files = IAR-GetResourceFiles $item.Database.Name
+     $foundfiles = @()
      $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
      $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
      $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
-     foreach( $n in $files.GetEnumerator())
-      {  
-       $file = $n.Value
-       Write-Host "check $file for  IAR  looking for $($item.ID)"
-       $path = [Sitecore.MainUtil]::MapPath($file)
-       $paths = [System.Collections.Generic.List[String]]@($path)
-       
-       $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
-       foreach($itemRecord in $itemDataSet.Definitions.Values)
-       {
-           $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
-           if ($id -eq $item.ID) {
-             return $file
-           } 
-       }
+     foreach($n in $files.GetEnumerator())
+     {  
+      $file = $n.Value
+      Write-Host "check $file for  IAR  looking for $($item.ID)"
+      $path = [Sitecore.MainUtil]::MapPath($file)
+      $paths = [System.Collections.Generic.List[String]]@($path)
+    
+      $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+      foreach($itemRecord in $itemDataSet.Definitions.Values)
+      {
+       $id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
+       if ($id -eq $item.ID) {
+         $foundfiles += $file
+       } 
       }
-    return ""
+      if ($itemDataSet.Definitions.Values.Count -eq 0)
+      {
+        $itemFieldsIARVersion = $itemDataSet.LanguageData.TryGetValue($item.ID.Guid.ToString("D"))
+        if ($itemFieldsIARVersion -ne $null)
+        {
+         $foundfiles += $file
+        }
+      }
+     }
+     return $foundfiles
     }
+    
 Languages:
 - Language: en
   Versions:
@@ -50,11 +60,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "aae637fe-b726-4f05-9793-7d82e4860b8a"
+      Value: "a3b08a68-fe39-4ba0-a4f5-87a60be90670"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T202718Z
+      Value: 20240329T115512Z

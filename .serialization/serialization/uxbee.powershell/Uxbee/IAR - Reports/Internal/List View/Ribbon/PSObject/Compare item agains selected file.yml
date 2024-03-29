@@ -2,7 +2,7 @@
 ID: "9bb8f07d-452d-46a3-9979-fa03da65078a"
 Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Compare"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Compare item agains selected file"
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
@@ -25,6 +25,7 @@ SharedFields:
   Hint: Script
   Value: |
     $database = $actionData
+    $item = Get-Item -Path "$($reportrow.Database):" -ID $reportrow.ID |
     
     function GetLanguageFieldValue($LanguageDataItem, $fieldguid, $version, $lan)
     {
@@ -250,11 +251,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "39cd80b1-2887-4d75-bb03-bae45be21748"
+      Value: "40804ce0-8b0a-4964-802c-4ea3ad750b94"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240325T214548Z
+      Value: 20240329T142608Z
