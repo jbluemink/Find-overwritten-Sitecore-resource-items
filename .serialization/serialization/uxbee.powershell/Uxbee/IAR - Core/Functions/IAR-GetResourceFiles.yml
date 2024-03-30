@@ -15,7 +15,11 @@ SharedFields:
         {
             $filepath = $n.InnerText.Replace('$(id)',$databaseName)
             Write-Host "path in config $filepath"
-            $serverpath = [Sitecore.IO.FileUtil]::MapPath("~/$filepath")
+            if ($filepath -like "*:*") {
+                $serverpath = $filepath
+            } else {
+                $serverpath = [Sitecore.IO.FileUtil]::MapPath("~/$filepath")
+            }
             Write-Host "ServerPath = $serverpath"
             $query = "$($serverpath)/*.dat"
             Get-ChildItem -Path $query | ForEach-Object {
@@ -42,11 +46,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "26392d36-a6dd-478b-ba13-9e3a606edadc"
+      Value: "581be225-867e-4d1b-ad7b-93462e63bc54"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230601T135019Z
+      Value: 20240330T084235Z
