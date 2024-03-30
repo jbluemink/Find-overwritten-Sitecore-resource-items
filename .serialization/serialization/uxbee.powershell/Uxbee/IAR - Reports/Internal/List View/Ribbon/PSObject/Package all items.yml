@@ -52,6 +52,9 @@ SharedFields:
     # Offer the user to download the package
     Download-File "$SitecorePackageFolder\$($package.Name)-$($package.Metadata.Version).zip"
     
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 500
 Languages:
 - Language: en
   Versions:
@@ -66,11 +69,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "eb133b87-ba57-485d-a30d-b68fd8d4e357"
+      Value: "35307b00-3751-4edf-8f86-db2b654ea4de"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
-        sitecore\Admin
+        sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240102T141540Z
+      Value: 20240330T090516Z

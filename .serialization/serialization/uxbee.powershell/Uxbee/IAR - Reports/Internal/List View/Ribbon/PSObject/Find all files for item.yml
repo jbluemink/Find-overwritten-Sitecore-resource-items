@@ -1,22 +1,22 @@
 ﻿---
-ID: "2e8ed902-6ef7-4cde-8646-aff85ac28615"
+ID: "8cafc3d9-46ee-484f-af90-f035beca62e2"
 Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
 Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
-Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Open"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/Find all files for item"
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
-  Value: Applications/32x32/text_rich.png
+  Value: Applications/32x32/find_selection.png
 - ID: "1c76313e-3c8c-4807-a826-135d10c39299"
   Hint: ShowRule
   Value: |
     <ruleset>
       <rule
-        uid="{D596BB54-E7E5-4B1E-9FA8-A9B9CFBE68C8}">
+        uid="{8E5F1CD2-6BFF-49D7-B2A3-8AE8AA108048}">
         <conditions>
           <condition
             id="{1B499603-87C9-4440-969F-D9568CE1E926}"
-            uid="2ED792F87BBD4CCFB9ADBA29EBB5D5CD"
+            uid="112CB455EFD84FDAB73A319CB8F54EB5"
             ValidViewName="FindIAR" />
         </conditions>
       </rule>
@@ -24,20 +24,25 @@ SharedFields:
 - ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
   Hint: Script
   Value: |
-    if ($actionData -ne "master") {
-     Show-Alert -Title "Note this item is in the $actionData Database so the context of the new Content Editor is  also $actionData "
+    Import-Function -Name IAR-FindResourceFile
+    Import-Function -Name IAR-Compare
+    
+    $database = $actionData
+    
+    foreach($reportrow in $selectedData) {
+      $item = Get-Item -Path "$($database):" -ID $reportrow.ID
+      $file = IAR-FindResourceFile $item
+      if ($file -eq "") {
+        Show-Alert "Resource file not found for item: $($item.Name)"
+      } else 
+      {
+         Show-Alert "Resource item: $($item.Name) is in file(s) $file"
+      }
     }
-    foreach($item in $selectedData){
-    # Run Sheer application on Desktop
-    Show-Application `
-        -Application "Content Editor" `
-        -Parameter @{id ="$($item.ID)"; fo="$($item.ID)"; 
-                     la="$($item.Language.Name)"; vs="$($item.Version.Number)";
-                     sc_content="$($item.Database)"}
-    }
+    
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 700
+  Value: 900
 Languages:
 - Language: en
   Versions:
@@ -45,22 +50,18 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20230312T152800Z
-    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
-      Hint: __Owner
-      Value: |
-        sitecore\Admin
+      Value: 20230304T141734Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "6de8b86e-3af0-41bf-b777-873aa790d1d5"
+      Value: "627e6d30-dab6-4df4-af56-be64c7a5c6d3"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240330T090553Z
+      Value: 20240330T090516Z
