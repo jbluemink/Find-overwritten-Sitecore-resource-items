@@ -31,12 +31,18 @@ SharedFields:
     
     foreach($reportrow in $selectedData) {
       $item = Get-Item -Path "$($database):" -ID $reportrow.ID
-      $file = IAR-FindResourceFile $item
+      $files = IAR-FindResourceFile $item
+      $fileslistHtmlformated = "<ul>"
+      foreach ($f in $files )
+      {
+          $fileslistHtmlformated += "<li>$f</li>"
+      }
+      $fileslistHtmlformated += "</ul>"
       if ($file -eq "") {
         Show-Alert "Resource file not found for item: $($item.Name)"
       } else 
       {
-         Show-Alert "Resource item: $($item.Name) is in file(s) $file"
+         Show-Alert "Resource item: $($item.Name) is in file(s) $fileslistHtmlformated "
       }
     }
     
@@ -57,11 +63,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "627e6d30-dab6-4df4-af56-be64c7a5c6d3"
+      Value: "9d3c65c9-2599-4dc2-89d7-ad4b1110495f"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240330T090516Z
+      Value: 20240330T181512Z

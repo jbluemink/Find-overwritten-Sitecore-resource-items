@@ -7,8 +7,11 @@
 - A Items as Resources, IAR Gutter with compare / resource file lookup.
 
 ### Recent Updates:
-- 2 jan 2024 Add support for core database and web for non XM Cloud
-- 30 sep 2023 Add package option in report.
+- 30 Sep 2023 Add package option in report.
+- 2 Jan 2024 Add support for core database and web for non XM Cloud
+- 16 March 2024 support fot Azure webapps
+- 30 March 2024 support for multiple file
+- 1 April 2024 add itemdefinition to the compare
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
@@ -45,7 +48,7 @@ Enable IAR Gutter in Sitecore content editor, right mouse click in the left from
 ![IAR-Gutter](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/sitecore-iar-gutter-with-resource-file-lookup-compare.png)
 
 # TODO
-- Add suppoprt for language .dat files.
+- Add file/item/fields viewer.
 
 # Installing
 3 options for installing this tool, choose the option you like 
@@ -85,3 +88,7 @@ dotnet sitecore itemres create -o iaroverwrittenreport
 first option too much hassle, hey this is even easier with an old fashioned sitecore zip package
 Download Find-overwritten-Sitecore-resource-items-{DATE}.zip  and use the sitecore package installer.
 In desktop, Development Tools, Installation Wizard
+
+# Tips
+When you get very quick a Message "The data for the dialog is not available. Either your server was restarted or the server cache was flushed. If this is a recurring problem, contact your system administrator."
+one reason could be low on memory when running Docker default container size is max 1 GB memory. add mem_limit: 4GB in the docker-compose.override.yml for the CM container.

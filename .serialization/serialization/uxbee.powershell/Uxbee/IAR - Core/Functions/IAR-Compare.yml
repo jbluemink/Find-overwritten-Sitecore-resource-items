@@ -87,7 +87,25 @@ SharedFields:
         
         Write-Host "SharedData = $($itemDataSet.SharedData) tryget $($item.ID)"
         $itemFieldsIAR = $itemDataSet.SharedData.TryGetValue($item.ID.ToGuid())
-        
+        $itemDefinition = $itemDataSet.Definitions.Item($item.ID.ToGuid())
+        if ($itemDefinition.Name -ne $item.Name)
+        {
+             $result += "WARNING itemDefinition Name:`n"
+             $result += "IAR<div style='background-color:Yellow;'>$($itemDefinition.Name)</div>"
+             $result +="DB<div style='background-color:Yellow;'>$($item.Name)</div>`n"
+        }
+        if ($itemDefinition.ParentID -ne $item.ParentID.ToGuid())
+        {
+             $result += "WARNING itemDefinition ParentID:`n"
+             $result += "IAR<div style='background-color:Yellow;'>$($itemDefinition.ParentID)</div>"
+             $result +="DB<div style='background-color:Yellow;'>$($item.ParentID.ToGuid())</div>`n"
+        }
+        if ($itemDefinition.TemplateID -ne $item.TemplateID.ToGuid())
+        {
+             $result += "WARNING itemDefinition TemplateID:`n"
+             $result += "IAR<div style='background-color:Yellow;'>$($itemDefinition.TemplateID)</div>"
+             $result +="DB<div style='background-color:Yellow;'>$($item.TemplateID.ToGuid())</div>`n"
+        }
         if ($itemFieldsIAR -ne $null)
         {
             Write-Host "Item found in IAR"
@@ -227,11 +245,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8707c162-7df9-43b4-9305-69fc7079044d"
+      Value: "635a5e59-6df2-4bc9-a34b-a82fa17fce3d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240329T141445Z
+      Value: 20240401T201308Z
