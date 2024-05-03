@@ -1,5 +1,6 @@
 # Find-overwritten-Sitecore-resource-items
 - A Sitecore PowerShell Report for Sitecore IAR items, Items as Resources.
+- Identify Which Items Are From Resource Files (IAR) and Database
 - A Content Editor warning for IAR items and IAR overridden, overwritten items in Sitecore PowerShell
 - A overwritten resource item compare in the Report
 - A overwritten resource item restore/delete in the Report
