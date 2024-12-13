@@ -19,7 +19,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
 
-## For Sitecore 10.2, Sitecore 10.3+ and XM Cloud
+## For Sitecore 10.2 - Sitecore 10.4+ and XM Cloud
 IAR Sitecore items can be overwritten by a sql database item, With the Sitecore PowerShell report you can easy find the item and delete/restore the item as resource.
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/find-overwritten-sitecore-resource-items.png)
