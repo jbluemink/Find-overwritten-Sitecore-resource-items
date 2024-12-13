@@ -1,3 +1,5 @@
+An easy-to-install and remove tool for viewing IAR items, fully built in Sitecore PowerShell. Option 3 is the simplest installation method. To uninstall, simply delete the /sitecore/system/Modules/PowerShell/Script Library/Uxbee folder.
+
 # Find-overwritten-Sitecore-resource-items
 - A Sitecore PowerShell Report for Sitecore IAR items, Items as Resources.
 - Identify Which Items Are From Resource Files (IAR) and Database
