@@ -196,13 +196,15 @@ SharedFields:
                 {
                     $query = [string]::Join("", $databaseName, ": -ID  $id")
                     $item = Get-Item -Path $query
+                    $path = $item.ItemPath
+                    $path = if ($item.ItemPath) { $item.ItemPath } else { "<span style='color: red;font-weight:bold;'>ORPHAN<span>" }
                     Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
                     $languages = GetLanguages $itemDataSet $itemRecord.ID
                     $reportItem = [PSCustomObject]@{
                         "Icon" = $item."__Icon"
                         "Name"= $item.Name
                         "Not Overwritten" = $notOverwritten
-                        "Path" = $item.ItemPath
+                        "Path" = $path
                         "Template" = $item.TemplateName
                         "ID" = $itemRecord.ID
                         "Language" = $languages 
@@ -274,11 +276,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a1170003-6f40-4a84-9a2d-b6f58927c25c"
+      Value: "78076bb8-c690-41c5-8ebc-ea0197e6229a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240325T213359Z
+      Value: 20241224T161930Z
