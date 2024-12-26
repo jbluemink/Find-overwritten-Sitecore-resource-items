@@ -1,5 +1,8 @@
+An easy-to-install and remove tool for viewing IAR items, fully built in Sitecore PowerShell. Option 3 is the simplest installation method. To uninstall, simply delete the /sitecore/system/Modules/PowerShell/Script Library/Uxbee folder.
+
 # Find-overwritten-Sitecore-resource-items
 - A Sitecore PowerShell Report for Sitecore IAR items, Items as Resources.
+- Identify Which Items Are From Resource Files (IAR) and Database
 - A Content Editor warning for IAR items and IAR overridden, overwritten items in Sitecore PowerShell
 - A overwritten resource item compare in the Report
 - A overwritten resource item restore/delete in the Report
@@ -16,13 +19,14 @@
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
 
-## For Sitecore 10.2, Sitecore 10.3+ and XM Cloud
+## For Sitecore 10.2 - Sitecore 10.4+ and XM Cloud
 IAR Sitecore items can be overwritten by a sql database item, With the Sitecore PowerShell report you can easy find the item and delete/restore the item as resource.
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/find-overwritten-sitecore-resource-items.png)
 
 ![compare-Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/iar-compare-report.png)
 See blog 
+- [Items as resources by Sitecore part 6: translation files and update item definitions](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-6)
 - [Create a Package Containing Overridden IAR Items](https://www.stockpick.nl/sitecore/create-a-package-containing-overridden-items/)
 - [Items as resources by Sitecore part 5: gutter](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-5)
 - [Items as resources by Sitecore part 4: compare](https://uxbee.nl/insights/items-as-resources-by-sitecore-part-4)
