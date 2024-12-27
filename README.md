@@ -8,6 +8,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 - A overwritten resource item restore/delete in the Report
 - A package resource item in the Report
 - A Items as Resources, IAR Gutter with compare / resource file lookup.
+- Find Orphan IAR items
 
 ### Recent Updates:
 - 30 Sep 2023 Add package option in report.
@@ -15,6 +16,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 - 16 March 2024 support fot Azure webapps
 - 30 March 2024 support for multiple file
 - 1 April 2024 add itemdefinition to the compare
+- 27 Dec 2024 beter Orphan item handeling
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
@@ -23,6 +25,8 @@ Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore
 IAR Sitecore items can be overwritten by a sql database item, With the Sitecore PowerShell report you can easy find the item and delete/restore the item as resource.
 
 ![Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/find-overwritten-sitecore-resource-items.png)
+
+![Example Orphan](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/orphan-find-overwritten-sitecore-resource-items.png)
 
 ![compare-Example](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/iar-compare-report.png)
 See blog 

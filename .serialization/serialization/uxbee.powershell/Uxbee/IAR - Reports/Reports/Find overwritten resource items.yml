@@ -109,7 +109,7 @@ SharedFields:
             @{
                 Name = "selectedAll"
                 Title = "Display all"
-                Value = 1
+                Value = 2
                 Options = $displayOptions
                 Tooltip = "Select All to get a report with all resource items with a overwritten column or show only the overwritten items for possible shorter report. "
                 Editor = "radio"
@@ -197,18 +197,33 @@ SharedFields:
                     $query = [string]::Join("", $databaseName, ": -ID  $id")
                     $item = Get-Item -Path $query
                     $path = $item.ItemPath
-                    $path = if ($item.ItemPath) { $item.ItemPath } else { "<span style='color: red;font-weight:bold;'>ORPHAN<span>" }
+                    $path = if ($item.ItemPath) { $item.ItemPath } else { "<span style='color: red;font-weight:bold;'>ORPHAN ${$itemRecord.Name} <span>" }
+                    $name = "";
+                    $templatename=$item.TemplateName;
+                    $note=""
+                    if ($item.Name) {
+                        $name=$item.Name
+                    } else {
+                      $itemDefinitionIAR = $itemDataSet.Definitions.Item($id.ToGuid())
+                      $name=$itemDefinitionIAR.Name
+                      $note="parentID=$($itemDefinitionIAR.ParentID)"
+                      $templatename=$itemDefinitionIAR.TemplateID
+                      $templateItem = Get-Item -Path "master:" -ID $itemDefinitionIAR.TemplateID
+                      if ($templateItem) {
+                         $templatename=$templateItem.Name
+                      }
+                    }
                     Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
                     $languages = GetLanguages $itemDataSet $itemRecord.ID
                     $reportItem = [PSCustomObject]@{
                         "Icon" = $item."__Icon"
-                        "Name"= $item.Name
+                        "Name"= $name
                         "Not Overwritten" = $notOverwritten
                         "Path" = $path
-                        "Template" = $item.TemplateName
+                        "Template" = $templatename
                         "ID" = $itemRecord.ID
                         "Language" = $languages 
-                        "Note" =  "" 
+                        "Note" =  $note
                         "File" = $pathstring
                         "Database" = $database
                     }
@@ -276,11 +291,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "78076bb8-c690-41c5-8ebc-ea0197e6229a"
+      Value: "a34e3c29-7716-4d6f-ad87-c804e6cfaae0"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241224T161930Z
+      Value: 20241227T103955Z
