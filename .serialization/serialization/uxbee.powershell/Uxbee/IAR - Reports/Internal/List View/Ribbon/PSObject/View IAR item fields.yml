@@ -1,0 +1,129 @@
+﻿---
+ID: "9eec5520-00c8-4c8b-93eb-168aba8aa639"
+Parent: "fd24e27a-3aa8-484b-8127-e92dcfc30b66"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Internal/List View/Ribbon/PSObject/View IAR item fields"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/32x32/printer3.png
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: |
+    <ruleset>
+      <rule
+        uid="{8E5F1CD2-6BFF-49D7-B2A3-8AE8AA108048}">
+        <conditions>
+          <condition
+            id="{1B499603-87C9-4440-969F-D9568CE1E926}"
+            uid="112CB455EFD84FDAB73A319CB8F54EB5"
+            ValidViewName="FindIAR" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function CheckIarItem ($databaseName, $pathstring, $itemId)
+    {
+        if ($itemId -eq $null)
+        {
+             Write-Host "Error item.ID is null"
+            exit
+        }
+    
+        Write-Host "View item: $($itemId) from file $($pathstring)"
+        $result = "<b style='font-size:18px;'>View IAR item fields:</b> $($item.FullPath)`n`n"
+        $result += "note: The IAR language data item can be stored in multiple files the view use 1 file  $pathstring. The Field GUID is shown, not the name.`n`n"
+        $reportItems = @()
+        $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
+        $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
+        $path = [Sitecore.MainUtil]::MapPath($pathstring)
+        $file = [System.IO.Path]::GetFileName($pathstring)
+        $paths = [System.Collections.Generic.List[String]]@($path)
+        $defaultFieldValues = New-Object -TypeName 'System.Collections.Generic.Dictionary[[guid], [string]]'
+        $itemDataSet = $resourceLoader.LoadFromFiles($paths, "dat", $defaultFieldValues)
+        Write-Host "Clear All SqlDataProvider Cache"
+        Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
+        Write-Host "Using the files in $path for database $databaseName"
+        
+        Write-Host "SharedData = $($itemDataSet.SharedData) tryget $itemId"
+        $itemFieldsIAR = $itemDataSet.SharedData.TryGetValue($itemId)
+        $itemDefinition = $itemDataSet.Definitions.Item($itemId)
+        if ($itemDefinition) {
+          $result += "Name: $($itemDefinition.Name)`n"
+          $result += "ParentID: $($itemDefinition.ParentID)`n"
+          $result += "TemplateID: $($itemDefinition.TemplateID)`n`n"
+        }
+        if ($itemFieldsIAR -ne $null)
+        {
+            Write-Host "Item found in IAR"
+            $result += "Shared Fields`n"
+            foreach($fieldIAR in $itemFieldsIAR.GetEnumerator())
+            {
+                $result += "<span style='background-color:Beige;'>$($fieldIAR.Key)</span>`n$($fieldIAR.Value.ToString())`n"
+            }
+        }
+    
+       $itemFieldsIARVersion = $itemDataSet.LanguageData.TryGetValue($itemId)
+        if ($itemFieldsIARVersion -ne $null)
+        {
+            Write-Host "Item found in IAR versioned fields"
+            $result += "`nFields`n"
+            foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
+            {
+                Write-Host "Language - $($languageIAR.Key) `n"
+                $lang = $languageIAR.Key
+                $VersionData = $languageIAR.Value
+                foreach($versionIAR in $VersionData.GetEnumerator())
+                {
+                  #version 0 is unversioned, else versioned
+                  if ($versionIAR.Key-eq 0) {
+                     $result += "Unversioned field for language: $lang`n"
+                  } else {
+                    $result += "versioned field, version $($versionIAR.Key) for language: $lang`n"
+                  }
+                  Write-Host "version is $($versionIAR.Key)"
+                  $fieldData = $versionIAR.Value
+    		  foreach($fieldvalueIAR in $fieldData.GetEnumerator())
+    		  {
+    		      Write-Host "field id is $($fieldvalueIAR.Key)  value=$($fieldvalueIAR.Value)"
+    		      $result += "<span style='background-color:Beige;'>$($fieldvalueIAR.Key)</span>`n$($fieldvalueIAR.Value.ToString())`n"
+    		  }
+    	      }
+            }
+        }
+    
+        return $result
+    }
+    
+    $database = $actionData
+    foreach($reportrow in $selectedData) {
+       	$changelog = CheckIarItem "$database" $reportrow.file $reportrow.ID
+       	Show-Alert $changelog
+    }
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 630
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230304T141734Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a34bb0d8-815b-4658-b2cd-964236716914"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jbluemink@uxbee.nl
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20241230T142345Z

@@ -56,10 +56,10 @@ SharedFields:
         $itemFieldsIARVersion = $itemDataSet.LanguageData.TryGetValue($itemkey)
         if ($itemFieldsIARVersion -ne $null)
         {
-            Write-Host "Item found in IAR versioned fields"
+            #Write-Host "Item found in IAR versioned fields"
             foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
             {
-                Write-Host "Language - $($languageIAR.Key) `n"
+                #Write-Host "Language - $($languageIAR.Key) `n"
                 if ($languages -notcontains $languageIAR.Key) {
                     $languages +=$languageIAR.Key
                 }
@@ -142,7 +142,7 @@ SharedFields:
            {
              $query = [string]::Join("", $databaseName, ": -ID  $id")
              $item = Get-Item -Path $query
-             Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
+             #Write-Host "$($itemRecord.Key) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
              $languages = GetLanguages $itemDataSet $itemRecord.Key
              $reportItem = [PSCustomObject]@{
     	    "Icon" = $item."__Icon"
@@ -161,6 +161,7 @@ SharedFields:
           }
         }
       }
+      Write-Host "Done count=$($reportItems.Length))"
       return $reportItems 
     }
     
@@ -291,11 +292,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a34e3c29-7716-4d6f-ad87-c804e6cfaae0"
+      Value: "5752b163-f7d9-4b09-98af-42822c68d01f"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241227T103955Z
+      Value: 20241230T134739Z
