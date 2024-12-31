@@ -126,8 +126,9 @@ SharedFields:
     function GetLanguageReportItems($itemDataSet, $itemkey) {
      $reportItems = @()
      $itemsfound= @()
-     foreach($itemRecord in $itemDataSet.LanguageData.Keys)
-     {
+     #foreach($itemRecord in $itemDataSet.LanguageData.Keys)
+     #{
+    Write-Host "iterator itemRecord language"
        foreach($itemrecord in $itemDataSet.LanguageData.GetEnumerator())
        {
          if ($itemsfound -notcontains $itemrecord.Key) {
@@ -141,16 +142,31 @@ SharedFields:
            if($itemDefinition -OR ($selectedAll -eq 2))
            {
              $query = [string]::Join("", $databaseName, ": -ID  $id")
-             $item = Get-Item -Path $query
-             #Write-Host "$($itemRecord.Key) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
-             $languages = GetLanguages $itemDataSet $itemRecord.Key
+             $icon =""
+             $name=""
+             $path=""
+             $template=""
+             try {
+               $item = Get-Item -Path $query -ErrorAction SilentlyContinue
+               if ($item) {
+                Write-Host "item=$($item.ItemPath)"
+                $icon = $item."__Icon"
+                $name=$item.Name
+                $path= $item.ItemPath
+                $template=$item.TemplateName
+               }
+             } catch {
+              Write-Host "gaat niet goed!!"
+              $item = $null
+             }
+             $languages = GetLanguages $itemDataSet $itemrecord.Key
              $reportItem = [PSCustomObject]@{
-    	    "Icon" = $item."__Icon"
-    	    "Name"= $item.Name
+    	    "Icon" = $icon 
+    	    "Name"= $name
     	    "Not Overwritten" = $notOverwritten
-    	    "Path" = $item.ItemPath
-    	    "Template" = $item.TemplateName
-    	    "ID" = $itemRecord.Key
+    	    "Path" = $path
+    	    "Template" = $template
+    	    "ID" = $itemrecord.Key
     	    "Language" = $languages 
                 "Note" =  "Only language data" 
     	    "File" = $pathstring
@@ -160,8 +176,8 @@ SharedFields:
             }
           }
         }
-      }
-      Write-Host "Done count=$($reportItems.Length))"
+      #}
+      Write-Host "Done."
       return $reportItems 
     }
     
@@ -214,7 +230,6 @@ SharedFields:
                          $templatename=$templateItem.Name
                       }
                     }
-                    Write-Host "$($itemRecord.ID) `"$($itemRecord.Name)`" $($item.Paths.FullPath) from $database $pathstring"
                     $languages = GetLanguages $itemDataSet $itemRecord.ID
                     $reportItem = [PSCustomObject]@{
                         "Icon" = $item."__Icon"
@@ -237,6 +252,7 @@ SharedFields:
             $reportItems += GetLanguageReportItems $itemDataSet 
        }
         Write-Host "Checking items for directory $pathstring done"
+       Write-Host "$((Get-Date).ToString())"
         return $reportItems
     }
     
@@ -292,11 +308,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "5752b163-f7d9-4b09-98af-42822c68d01f"
+      Value: "e40e32b8-87df-4ebf-9f0b-ae8fa107e1d0"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241230T134739Z
+      Value: 20241231T133417Z
