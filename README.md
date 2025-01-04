@@ -17,6 +17,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 - 30 March 2024 support for multiple file
 - 1 April 2024 add itemdefinition to the compare
 - 27 Dec 2024 beter Orphan item handeling
+- 4 Jan 2024 view item fields, bug fix for sxa language file, increase performance.
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
@@ -54,9 +55,6 @@ To enable, in Sitecore Shell, bottom left corner start button, click, PowerShell
 Enable IAR Gutter in Sitecore content editor, right mouse click in the left from the Tree, enable IAR Gutter
 
 ![IAR-Gutter](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/sitecore-iar-gutter-with-resource-file-lookup-compare.png)
-
-# TODO
-- Add file/item/fields viewer.
 
 # Installing
 3 options for installing this tool, choose the option you like 

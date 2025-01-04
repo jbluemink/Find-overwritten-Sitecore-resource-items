@@ -126,9 +126,6 @@ SharedFields:
     function GetLanguageReportItems($itemDataSet, $itemkey) {
      $reportItems = @()
      $itemsfound= @()
-     #foreach($itemRecord in $itemDataSet.LanguageData.Keys)
-     #{
-    Write-Host "iterator itemRecord language"
        foreach($itemrecord in $itemDataSet.LanguageData.GetEnumerator())
        {
          if ($itemsfound -notcontains $itemrecord.Key) {
@@ -176,7 +173,6 @@ SharedFields:
             }
           }
         }
-      #}
       Write-Host "Done."
       return $reportItems 
     }
@@ -197,8 +193,6 @@ SharedFields:
         $callContext = New-Object -TypeName "Sitecore.Data.DataProviders.CallContext, Sitecore.Kernel" -ArgumentList @($database.DataManager, $database.DataProviders.Count)
         $sqlDataProvider = New-Object -TypeName "Sitecore.Data.SqlServer.SqlServerDataProvider, Sitecore.Kernel" -ArgumentList @($connectionString)
         $itemsRemoved = $false
-        Write-Host "Clear All SqlDataProvider Cache"
-        Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
         Write-Host "Check if resource items are in sql database"
         Write-Host "Using the files in $path for database $databaseName"
         foreach($itemRecord in $itemDataSet.Definitions.Values)
@@ -251,9 +245,9 @@ SharedFields:
             Write-Host "Checking items as language file"
             $reportItems += GetLanguageReportItems $itemDataSet 
        }
-        Write-Host "Checking items for directory $pathstring done"
+       Write-Host "Checking items for directory $pathstring done"
        Write-Host "$((Get-Date).ToString())"
-        return $reportItems
+       return $reportItems
     }
     
     
@@ -276,6 +270,8 @@ SharedFields:
         ViewName = "FindIAR"
     }
     
+    Write-Host "Clear All SqlDataProvider Cache"
+    Get-Cache -Name "SqlDataProvider - Prefetch data*" | % { $_.Clear() }
     $reportItems = @()
     foreach($val in $selectedPaths) {
         $reportItems += CheckPath $database $val
@@ -308,11 +304,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e40e32b8-87df-4ebf-9f0b-ae8fa107e1d0"
+      Value: "de7e4960-2669-4000-b826-08d0041c2eb9"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241231T133417Z
+      Value: 20250104T094457Z

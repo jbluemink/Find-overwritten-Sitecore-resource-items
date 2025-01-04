@@ -69,7 +69,6 @@ SharedFields:
         if ($itemFieldsIARVersion -ne $null)
         {
             Write-Host "Item found in IAR versioned fields"
-            $result += "`nFields`n"
             foreach($languageIAR in $itemFieldsIARVersion.GetEnumerator())
             {
                 Write-Host "Language - $($languageIAR.Key) `n"
@@ -79,9 +78,9 @@ SharedFields:
                 {
                   #version 0 is unversioned, else versioned
                   if ($versionIAR.Key-eq 0) {
-                     $result += "Unversioned field for language: $lang`n"
+                     $result += "`nUnversioned field for language: $lang`n"
                   } else {
-                    $result += "versioned field, version $($versionIAR.Key) for language: $lang`n"
+                    $result += "`nVersioned field, version $($versionIAR.Key) for language: $lang`n"
                   }
                   Write-Host "version is $($versionIAR.Key)"
                   $fieldData = $versionIAR.Value
@@ -119,11 +118,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a34bb0d8-815b-4658-b2cd-964236716914"
+      Value: "70519a89-bdba-494e-98ba-c779cc5882d4"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241230T142345Z
+      Value: 20250104T095132Z
