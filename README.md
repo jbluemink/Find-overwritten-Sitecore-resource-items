@@ -18,7 +18,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 - 1 April 2024 add itemdefinition to the compare
 - 27 Dec 2024 beter Orphan item handeling
 - 4 Jan 2024 view item fields, bug fix for sxa language file, increase performance.
-- 11 Jan 2024 Adding Simple report, using fast OOTB methode, less advanced.
+- 11 Jan 2025 Adding Simple report, using fast OOTB methode, less advanced.
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
