@@ -12,12 +12,19 @@ SharedFields:
   Value: |
     <ruleset>
       <rule
-        uid="{AF9B1BEE-BD11-41AF-B037-4F2C303F7220}">
+        uid="{8E5F1CD2-6BFF-49D7-B2A3-8AE8AA108048}">
         <conditions>
-          <condition
-            id="{1B499603-87C9-4440-969F-D9568CE1E926}"
-            uid="D1E626AFB84247E087C437CB71BA0D88"
-            ValidViewName="FindIAR" />
+          <or
+            uid="2D2021BC3BC14CC7AF513AEBF91EF1E5">
+            <condition
+              id="{1B499603-87C9-4440-969F-D9568CE1E926}"
+              uid="112CB455EFD84FDAB73A319CB8F54EB5"
+              ValidViewName="FindIAR" />
+            <condition
+              id="{1B499603-87C9-4440-969F-D9568CE1E926}"
+              uid="95C4D65244224A2DB98DE5E6FEBCB435"
+              ValidViewName="SimpleFindIAR" />
+          </or>
         </conditions>
       </rule>
     </ruleset>
@@ -61,11 +68,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e06a1c8d-26ab-4f8c-bde2-e90d1e4e8cef"
+      Value: "b9070324-3513-428d-bb5c-48cca8789688"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240330T090538Z
+      Value: 20250111T212327Z

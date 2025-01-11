@@ -1,0 +1,136 @@
+﻿---
+ID: "b5c9313b-d04f-4011-b1bd-d70201fb9fb3"
+Parent: "71446b58-9d84-4e23-b2a3-6213af7bacbd"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Uxbee/IAR - Reports/Reports/Simple Find overwritten resource items"
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: businessv2/32x32/data_warning.png
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function GetDatabases() {
+     $databases = [ordered]@{
+    	"core" = "core"
+    	"master" = "master"
+     }
+     $sitecoreversioninfo = [Sitecore.Configuration.About]::VersionInformation()
+     if ($sitecoreversioninfo.Contains("XMCloud") -eq $false)
+     {
+        $databases.Add("web", "web")
+     }
+    
+     return $databases
+    }
+      
+    
+    $dbsettings = @{
+        Title = "Report Filter database"
+        OkButtonName = "Next"
+        CancelButtonName = "Abort"
+        Description = "List all databases"
+        Parameters = @(
+            @{
+                Name = "database"
+                Title = "Database"
+                Value = "master"
+                Options = GetDatabases
+                Tooltip = "Pick first the database "
+                Editor = "radio"
+            }
+        )
+        Icon = [regex]::Replace($PSScript.Appearance.Icon, "Office", "OfficeWhite", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        ShowHint = $true
+    }
+    $resultdb = Read-Variable @dbsettings
+    if($resultdb -ne "ok") {
+        Exit
+    }
+    
+    
+    function CheckForOverriddenItems($databaseName)
+    {
+        $reportItems = @()
+       
+        $rootquery = [string]::Join("", $databaseName, ": -ID  {11111111-1111-1111-1111-111111111111}")
+        $root = Get-Item -Path $rootquery
+       
+        Write-Host "Check for database $databaseName"
+        #get a list of all overwritten items:
+        $overriddenitemids = $root.Database.DataManager.DataSource.GetOverriddenItems()
+    
+        foreach($itemid in $overriddenitemids)
+            {
+                #$id = New-Object -TypeName "Sitecore.Data.ID, Sitecore.Kernel" -ArgumentList @($itemRecord.ID)
+                $query = [string]::Join("", $databaseName, ": -ID $itemid")
+                $loopitem = Get-Item -Path $query
+                    $reportItem = [PSCustomObject]@{
+                        "Icon" = $loopitem."__Icon"
+                        "Name"= $loopitem.Name
+                        "Not Overwritten" = $false
+                        "Path" = $loopitem.Paths.Path
+                        "Template" = $loopitem.TemplateName
+                        "ID" = $itemid
+                        "Database" = $database
+                    }
+                    $reportItems += $reportItem
+          }
+       return $reportItems
+    }
+    
+    
+    $reportProps = @{
+        Property = @(
+            "Icon",
+            "Name",
+            "Not Overwritten",
+            "Path",
+            "Template",
+            "ID",
+            "Database"
+        )
+        Title = "Simple Overwritten resource item report"
+        InfoTitle = "Item as resource"
+        InfoDescription = "View if a resource file item is overwritten in sql database"
+        ViewName = "SimpleFindIAR"
+    }
+    
+    $reportItems = @()
+    $reportItems += CheckForOverriddenItems $database
+    
+    $reportItems | 
+            Show-ListView @reportProps -ActionData "$database"
+     
+    Close-Window
+    
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: 
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230320T073814Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\Admin
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "6502a8c9-7942-446d-8040-2672e7679507"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jbluemink@uxbee.nl
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250111T212837Z
