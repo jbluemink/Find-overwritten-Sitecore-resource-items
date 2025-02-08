@@ -53,6 +53,9 @@ SharedFields:
 Languages:
 - Language: en
   Fields:
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
+    Hint: __Short description
+    Value: Restore the resource item by deleting it via the SqlServerDataProvider. Caches or indexes may be missed, and no webhook is called
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: SQL Delete
@@ -68,11 +71,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "b9070324-3513-428d-bb5c-48cca8789688"
+      Value: "53bd5f5a-9400-43b3-967b-ec59f64d63a3"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250111T212327Z
+      Value: 20250208T130414Z

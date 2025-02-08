@@ -260,6 +260,10 @@ SharedFields:
   Value: 200
 Languages:
 - Language: en
+  Fields:
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
+    Hint: __Short description
+    Value: Compare database item against the item in the selected resource file
   Versions:
   - Version: 1
     Fields:
@@ -272,11 +276,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "4354d2a9-b01e-40fb-9657-178d4f6d8514"
+      Value: "e2589a3c-875c-4e95-b664-e6a60825891d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240401T200440Z
+      Value: 20250208T125742Z

@@ -38,6 +38,10 @@ SharedFields:
     }
 Languages:
 - Language: en
+  Fields:
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
+    Hint: __Short description
+    Value: Restore the resource item by deleting the item, which also restores the children (if there are any), or delete the children separately
   Versions:
   - Version: 1
     Fields:
@@ -50,11 +54,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "12fc5d02-03c9-44e9-830b-416e4263e582"
+      Value: "6e12a608-f61a-4ce0-9724-b5df0b1cd463"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250111T212320Z
+      Value: 20250208T130052Z

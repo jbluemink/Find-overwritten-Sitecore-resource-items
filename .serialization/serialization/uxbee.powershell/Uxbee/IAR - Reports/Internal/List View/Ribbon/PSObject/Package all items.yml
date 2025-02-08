@@ -64,6 +64,10 @@ SharedFields:
   Value: 500
 Languages:
 - Language: en
+  Fields:
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
+    Hint: __Short description
+    Value: "Package all items in this report (note: children not included)."
   Versions:
   - Version: 1
     Fields:
@@ -76,11 +80,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "9710d690-22d4-4032-b1b8-69917fceeb0d"
+      Value: "a28e633b-42e8-44f2-91fc-57aed2a87151"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250111T212334Z
+      Value: 20250208T130552Z
