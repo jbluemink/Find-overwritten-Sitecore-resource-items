@@ -42,7 +42,7 @@ SharedFields:
     {
           $fielditem = Get-Item -Path "$($item.Database.Name):" -ID $fieldguid
           $result = "$type $fieldguid <b>$($fielditem.Name)</b>`n"
-          $result += "IAR<div style='background-color:Yellow;'>"
+          $result += "IAR<div style='background-color:Gold;'>"
           $result += [System.Net.WebUtility]::HtmlEncode($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))
           if ($iarvalue.Length -gt 500) {
            $result += "... <b>length=$($iarvalue.Length) characters</b>"
@@ -70,7 +70,7 @@ SharedFields:
             exit
         }
         Write-Host "Compare item: $($item.FullPath)"
-        $result = "<b style='font-size:18px;'>Compare IAR item with DB variant:</b> $($item.FullPath)`n`n$pathstring`n`n"
+        $result = "<b style='font-size:18px;'>Compare IAR item with current (DB) variant:</b> $($item.FullPath)`n`n$pathstring`n`n"
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
         $resourceLoader = [Sitecore.DependencyInjection.ServiceLocator]::ServiceProvider.GetService($resourceLoaderType)
@@ -245,11 +245,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "635a5e59-6df2-4bc9-a34b-a82fa17fce3d"
+      Value: "0dfb909f-6dd5-47a0-9891-18ac4950d719"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240401T201308Z
+      Value: 20250209T135856Z

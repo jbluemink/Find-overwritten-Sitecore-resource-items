@@ -205,14 +205,25 @@ SharedFields:
                 }
                 if($itemDefinition -OR ($selectedAll -eq 2))
                 {
+                	$isorphan = $false
                     $query = [string]::Join("", $databaseName, ": -ID  $id")
                     $item = Get-Item -Path $query
                     $path = $item.ItemPath
-                    $path = if ($item.ItemPath) { $item.ItemPath } else { "<span style='color: red;font-weight:bold;'>ORPHAN ${$itemRecord.Name} <span>" }
+                    $path = if ($item.ItemPath) { 
+    		    if ($item.ItemPath -match "^/sitecore") { 
+    		        $item.ItemPath 
+    		    } else { 
+    		        "<span style='color: red;font-weight:bold;'>ORPHAN</span> $($item.ItemPath)"
+    		        $isorphan = $true
+    		    }
+    		} else { 
+    		    "<span style='color: red;font-weight:bold;'>ORPHAN $($itemRecord.Name)</span>"
+    		    
+    		}
                     $name = "";
                     $templatename=$item.TemplateName;
                     $note=""
-                    if ($item.Name) {
+                    if ($item.Name -and ($isOrphan -eq $false)) {
                         $name=$item.Name
                     } else {
                       $itemDefinitionIAR = $itemDataSet.Definitions.Item($id.ToGuid())
@@ -304,11 +315,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "de7e4960-2669-4000-b826-08d0041c2eb9"
+      Value: "e08a3349-4089-425e-a06c-33ee501648f8"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250104T094457Z
+      Value: 20250208T164937Z

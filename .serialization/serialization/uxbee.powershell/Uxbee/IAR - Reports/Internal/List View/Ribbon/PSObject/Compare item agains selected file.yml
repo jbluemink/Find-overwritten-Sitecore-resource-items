@@ -62,7 +62,7 @@ SharedFields:
     {
           $fielditem = Get-Item -Path "$($item.Database.Name):" -ID $fieldguid
           $result = "$type $fieldguid <b>$($fielditem.Name)</b>`n"
-          $result += "IAR<div style='background-color:Yellow;'>"
+          $result += "IAR<div style='background-color:Gold;'>"
           $result += [System.Net.WebUtility]::HtmlEncode($iarvalue.substring(0, [System.Math]::Min(500, $iarvalue.Length)))
           if ($iarvalue.Length -gt 500) {
            $result += "... <b>length=$($iarvalue.Length) characters</b>"
@@ -90,7 +90,7 @@ SharedFields:
             exit
         }
         Write-Host "Compare item: $($item.FullPath)"
-        $result = "<b style='font-size:18px;'>Compare IAR item with DB variant:</b> $($item.FullPath)`n`n"
+        $result = "<b style='font-size:18px;'>Compare IAR item with current (DB) variant:</b> $($item.FullPath)`n`n"
         $result += "note: The IAR language data item can be stored in multiple files the compare use 1 file  $pathstring`n`n"
         $reportItems = @()
         $resourceLoaderType = ([System.Type]::GetType("Sitecore.Data.DataProviders.ReadOnly.Protobuf.IResourceLoader, Sitecore.Data.ResourceItems.ProtobufNet"))
@@ -276,11 +276,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e2589a3c-875c-4e95-b664-e6a60825891d"
+      Value: "eace0db2-3ec8-4a6c-b5c3-36e94a77786f"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250208T125742Z
+      Value: 20250209T140017Z
