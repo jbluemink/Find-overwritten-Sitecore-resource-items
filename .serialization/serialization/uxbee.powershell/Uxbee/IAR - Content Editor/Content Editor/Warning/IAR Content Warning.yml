@@ -47,10 +47,15 @@ SharedFields:
      $warning.Text = $text
     }
     
-    $script = Get-Item -Path "master:" -ID $scriptId
-    $command = "item:executescript(id=$($item.ID),db=$($item.Database.Name),script=$($script.ID),scriptDb=$($script.Database.Name))"
-    $warning.AddOption("$scriptText ", $command)
-    $warning.HideFields = $false
+    if ($warning -ne $null) {
+        $script = Get-Item -Path "master:" -ID $scriptId
+        $command = "item:executescript(id=$($item.ID),db=$($item.Database.Name),script=$($script.ID),scriptDb=$($script.Database.Name))"
+        $warning.AddOption("$scriptText ", $command)
+        $warning.HideFields = $false
+    }
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "d9648f86-0c24-4af3-ad2b-f9826ef41fcf"
 - ID: "f62c67b4-28b6-4a6f-91cb-db78cf054f4e"
   Hint: EnableRule
   Value: <ruleset />
@@ -68,11 +73,11 @@ Languages:
         sitecore\Admin
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "c2f0e325-e84f-454c-a502-c8f943927252"
+      Value: "f5f066c6-1521-458c-9e7c-d8ee3f30643a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jbluemink@uxbee.nl
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240329T100448Z
+      Value: 20260108T131830Z
