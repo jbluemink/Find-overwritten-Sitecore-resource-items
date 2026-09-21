@@ -22,6 +22,7 @@ An easy-to-install and remove tool for viewing IAR items, fully built in Sitecor
 - 8 Feb 2025 Adding help text to action buttons.
 - 9 Feb 2025 fix for Orphan detection and text/styling 
 - 15 Jan 2026 fix log error
+- 21 Sep 2026 Added a package for SitecoreAI marketplace app Content Transfer Studio
 
 ## PowerShell only
 Certainly with Sitecore XM Cloud there is more resistance to extend the Sitecore CMS using c# code in a custom DLL. But with Sitecore PowerShell a lot can be done these tools are completely in Sitecore PowerShell and everything is in Sitecore items no files needed.
@@ -61,13 +62,16 @@ Enable IAR Gutter in Sitecore content editor, right mouse click in the left from
 ![IAR-Gutter](https://raw.githubusercontent.com/jbluemink/Find-overwritten-Sitecore-resource-items/main/sitecore-iar-gutter-with-resource-file-lookup-compare.png)
 
 # Installing
-3 options for installing this tool, choose the option you like 
+4 options for installing this tool, choose the option you like 
 
-## option 1) Download and Install the tool, Powershell Report
+## option 1) Download the release
+In the Releases section you found a zip package that is suitable for marketplace app Content Transfer Studio
+
+## option 2) Download and Install the tool, Powershell Report
 For just installing and use the tool the easy way is:
 copy items.master.iaroverwrittenreport.dat  to \sitecore modules\items\master of your Sitecore CM instance.
 
-## option 2) For using the Sitecore CLI and optional using Visual Studio to edit the module.json
+## option 3) For using the Sitecore CLI and optional using Visual Studio to edit the module.json
 ### Install Sitecore Command Line Interface
 See: [Install Sitecore Command Line Interface](https://doc.sitecore.com/xp/en/developers/103/developer-tools/install-sitecore-command-line-interface.html) \
 Note: You must have .NET 6 installed on your workstation before installing the Sitecore CLI.
@@ -94,7 +98,7 @@ dotnet sitecore ser pull
 For developers if you made changes and want to update the .dat file
 dotnet sitecore itemres create -o iaroverwrittenreport
 
-## option 3) Install the package zip
+## option 4) Install the package zip (deprecated)
 first option too much hassle, hey this is even easier with an old fashioned sitecore zip package
 Download Find-overwritten-Sitecore-resource-items-{DATE}.zip  and use the sitecore package installer.
 In desktop, Development Tools, Installation Wizard
